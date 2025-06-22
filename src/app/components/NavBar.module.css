@@ -1,0 +1,11 @@
+.gradient {
+  animation: moveGradient 5s linear alternate-reverse infinite;
+}
+@keyframes moveGradient {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: -50%;
+  }
+}
