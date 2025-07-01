@@ -14,6 +14,7 @@ import { useState } from "react";
 import styles from "./NavBar.module.css";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
+import { Button } from "@/ui/button";
 
 const NavBar = ({ session }: { session: Session | null }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -78,9 +79,9 @@ const NavBar = ({ session }: { session: Session | null }) => {
           >
             {session != null ? (
               <>
-                <button
+                <Button
                   type="button"
-                  className="w-full flex gap-3 lg:gap-4 p-3 rounded-md items-center cursor-pointer group hover:bg-slate-200 focus:bg-slate-200 transition-colors"
+                  className="hover:bg-slate-200 focus:bg-slate-200 transition-colors"
                 >
                   <SunIcon
                     size={28}
@@ -89,23 +90,25 @@ const NavBar = ({ session }: { session: Session | null }) => {
                   <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
                     Current Theme
                   </span>
-                </button>
-                <Link
-                  href="/settings"
-                  className="w-full flex gap-3 lg:gap-4 p-3 rounded-md items-center group hover:bg-slate-200 focus:bg-slate-200 transition-colors"
+                </Button>
+                <Button
+                  className="hover:bg-slate-200 focus:bg-slate-200 transition-colors"
+                  asChild
                 >
-                  <Settings
-                    size={28}
-                    className="text-cyan-900/90 group-hover:text-cyan-700/70 group-focus:text-cyan-700/70 transition-colors"
-                  />
-                  <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
-                    Account Settings
-                  </span>
-                </Link>
-                <button
+                  <Link href="/settings">
+                    <Settings
+                      size={28}
+                      className="text-cyan-900/90 group-hover:text-cyan-700/70 group-focus:text-cyan-700/70 transition-colors"
+                    />
+                    <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
+                      Account Settings
+                    </span>
+                  </Link>
+                </Button>
+                <Button
                   type="button"
                   onClick={() => signOut()}
-                  className="cursor-pointer w-full flex gap-3 lg:gap-4 p-3 rounded-md items-center group hover:bg-slate-200 focus:bg-slate-200 transition-colors"
+                  className="hover:bg-slate-200 focus:bg-slate-200 transition-colors"
                 >
                   <LogOut
                     size={28}
@@ -114,12 +117,12 @@ const NavBar = ({ session }: { session: Session | null }) => {
                   <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
                     Logout
                   </span>
-                </button>
+                </Button>
               </>
             ) : (
               <button
                 type="button"
-                onClick={() => signIn("github")}
+                onClick={() => signIn()}
                 className="cursor-pointer w-full flex gap-3 lg:gap-4 p-3 rounded-md items-center group hover:bg-slate-200 focus:bg-slate-200 transition-colors"
               >
                 <LogIn
