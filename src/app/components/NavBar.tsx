@@ -30,7 +30,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
             className="text-yellow-600 brightness-125 group-hover:text-orange-700 group-hover:brightness-200 group-hover:scale-105 transition"
           />
           <span
-            className="font-sans font-semibold text-yellow-500 brightness-110 text-4xl text-shadow-2xs text-shadow-amber-600 
+            className="font-semibold text-yellow-500 brightness-110 text-4xl text-shadow-2xs text-shadow-amber-600 
           group-hover:text-orange-400 group-hover:brightness-125 group-hover:scale-95 transition"
           >
             Moodies
@@ -87,9 +87,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
                     size={28}
                     className="text-amber-700/90 group-hover:text-amber-600/70 group-focus:text-amber-600/70 transition-colors"
                   />
-                  <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
-                    Current Theme
-                  </span>
+                  <span className="font-medium">Current Theme</span>
                 </Button>
                 <Button
                   className="hover:bg-slate-200 focus:bg-slate-200 transition-colors"
@@ -100,9 +98,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
                       size={28}
                       className="text-cyan-900/90 group-hover:text-cyan-700/70 group-focus:text-cyan-700/70 transition-colors"
                     />
-                    <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
-                      Account Settings
-                    </span>
+                    <span className="font-medium">Account Settings</span>
                   </Link>
                 </Button>
                 <Button
@@ -114,9 +110,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
                     size={28}
                     className="text-red-900/60 group-hover:text-red-700/60 group-focus:text-red-700/60 transition-colors"
                   />
-                  <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
-                    Logout
-                  </span>
+                  <span className="font-medium">Logout</span>
                 </Button>
               </>
             ) : (
@@ -129,9 +123,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
                   size={28}
                   className="text-emerald-800/40 group-hover:text-emerald-700/30 group-focus:text-emerald-700/30 transition-colors"
                 />
-                <span className="text-sm font-medium text-shadow-2xs text-shadow-neutral-400">
-                  Login
-                </span>
+                <span className="font-medium">Login</span>
               </button>
             )}
           </div>
