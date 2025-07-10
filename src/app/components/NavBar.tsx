@@ -15,6 +15,7 @@ import styles from "./NavBar.module.css";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { Button } from "@/ui/button";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const NavBar = ({ session }: { session: Session | null }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -71,7 +72,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
           </button>
           {/* Dropdown */}
           <div
-            className={`absolute top-full right-0 mt-4 p-4 w-xl max-w-[256px] overflow-hidden rounded-xl ring-1 ring-slate-700/4 bg-slate-100 shadow-md origin-top ${
+            className={`absolute top-full right-0 mt-4 p-4 space-y-1.5 w-xl max-w-[256px] overflow-hidden rounded-xl ring-1 dark:ring-2 ring-slate-700/4 dark:ring-neutral-300/30 bg-slate-100 dark:bg-gray-700 shadow-md origin-top ${
               isExpanded
                 ? "rotate-x-0 opacity-100 z-50"
                 : "rotate-x-90 opacity-0 -z-50"
@@ -79,52 +80,36 @@ const NavBar = ({ session }: { session: Session | null }) => {
           >
             {session != null ? (
               <>
-                <Button
-                  type="button"
-                  className="hover:bg-slate-200 focus:bg-slate-200 transition-colors"
-                >
-                  <SunIcon
-                    size={28}
-                    className="text-amber-700/90 group-hover:text-amber-600/70 group-focus:text-amber-600/70 transition-colors"
-                  />
-                  <span className="font-medium">Current Theme</span>
-                </Button>
-                <Button
-                  className="hover:bg-slate-200 focus:bg-slate-200 transition-colors"
-                  asChild
-                >
+                <ThemeSwitcher />
+                <Button asChild>
                   <Link href="/settings">
                     <Settings
                       size={28}
-                      className="text-cyan-900/90 group-hover:text-cyan-700/70 group-focus:text-cyan-700/70 transition-colors"
+                      className="text-cyan-900/90 dark:text-cyan-400/80 group-hover:text-cyan-700/70 dark:group-hover:text-cyan-500/80 group-focus:text-cyan-700/70 dark:group-focus:text-cyan-500/80 transition-colors"
                     />
                     <span className="font-medium">Account Settings</span>
                   </Link>
                 </Button>
-                <Button
-                  type="button"
-                  onClick={() => signOut()}
-                  className="hover:bg-slate-200 focus:bg-slate-200 transition-colors"
-                >
+                <Button type="button" onClick={() => signOut()}>
                   <LogOut
                     size={28}
-                    className="text-red-900/60 group-hover:text-red-700/60 group-focus:text-red-700/60 transition-colors"
+                    className="text-red-900/60 dark:text-red-400/70 group-hover:text-red-700/60 group-focus:text-red-700/60 transition-colors"
                   />
                   <span className="font-medium">Logout</span>
                 </Button>
               </>
             ) : (
-              <button
+              <Button
                 type="button"
                 onClick={() => signIn()}
                 className="cursor-pointer w-full flex gap-3 lg:gap-4 p-3 rounded-md items-center group hover:bg-slate-200 focus:bg-slate-200 transition-colors"
               >
                 <LogIn
                   size={28}
-                  className="text-emerald-800/40 group-hover:text-emerald-700/30 group-focus:text-emerald-700/30 transition-colors"
+                  className="text-emerald-800/40 dark:text-emerald-500/70 group-hover:text-emerald-700/30 dark:group-hover:text-emerald-500/40 group-focus:text-emerald-700/30 dark:group-focus:text-emerald-500/40 transition-colors"
                 />
                 <span className="font-medium">Login</span>
-              </button>
+              </Button>
             )}
           </div>
         </div>

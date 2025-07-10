@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { auth } from "../../auth";
 import { Button } from "@/ui/button";
+import Link from "next/link";
 
 export default async function Home() {
   // const session = await auth();
@@ -22,7 +23,7 @@ export default async function Home() {
           <br />
           Track your mood and grow every day.
         </h1>
-        <p className="font-serif text-xl sm:text-2xl text-neutral-800 mb-12">
+        <p className="text-xl sm:text-2xl text-neutral-800 dark:text-neutral-200 mb-12">
           Start your journey to self-awareness by logging your mood every day.
         </p>
         {/* CTA */}
@@ -31,8 +32,8 @@ export default async function Home() {
             Get Started
           </span>
           <span className="text-xl">⟶</span>
-          <Button variant="cta" size="adaptive">
-            Log In
+          <Button variant="cta" size="adaptive" asChild>
+            <Link href="/sign-in">Log In</Link>
           </Button>
         </div>
       </div>

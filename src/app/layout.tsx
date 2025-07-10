@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito, Lora } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 import NavBar from "./components/NavBar";
 import { auth } from "../../auth";
 
@@ -26,10 +27,12 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${nunito.variable} ${lora.variable} antialiased`}>
-        <NavBar session={session} />
-        {children}
+        <ThemeProvider defaultTheme="light">
+          <NavBar session={session} />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

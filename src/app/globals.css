@@ -12,15 +12,13 @@
   --font-serif: var(--font-lora);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+[data-theme="dark"] {
+  --background: #1c1a16;
+  --foreground: hsl(40, 24%, 93%);
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  /* font-family: Arial, Helvetica, sans-serif; */
 }

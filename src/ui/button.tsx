@@ -6,9 +6,10 @@ import React from "react";
 const buttonVariants = cva("cursor-pointer focus:outline-none", {
   variants: {
     variant: {
-      "nav-link": "flex items-center group transition-colors",
+      "nav-link":
+        "flex items-center hover:bg-slate-200 dark:hover:bg-gray-800 focus:bg-slate-200 dark:focus:bg-gray-800 group transition-colors",
       "provider-login":
-        "flex items-center ring-1 ring-neutral-300 shadow bg-neutral-50 hover:bg-slate-100 hover:shadow-md focus:bg-slate-100 focus:shadow-md transition",
+        "flex items-center ring-1 ring-neutral-300 dark:ring-neutral-400/40 shadow bg-neutral-50 dark:bg-gray-700 hover:bg-slate-100 dark:hover:bg-gray-800/90 hover:shadow-md focus:bg-slate-100 dark:focus:bg-gray-800/90 focus:shadow-md transition",
       cta: "bg-teal-600 text-teal-50 text-shadow-2xs text-shadow-neutral-800 shadow ring-1 ring-teal-900/40 hover:bg-teal-700 focus:bg-teal-700 transition-colors",
     },
     size: {
