@@ -1,8 +1,13 @@
 import { Button } from "@/ui/button";
-import { signIn, providersMap } from "../../../auth";
+import { signIn, providersMap, auth } from "../../../auth";
 import { FaGithub } from "react-icons/fa";
+import { redirect } from "next/navigation";
 
-const SignInPage = () => {
+const SignInPage = async () => {
+  const session = await auth();
+  if (session) {
+    redirect("/moods");
+  }
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="w-[95vw] max-w-md h-[248px] p-8 rounded-lg mx-auto bg-slate-50 dark:bg-gray-600 shadow-md ring-1 dark:ring-2 ring-neutral-300 dark:ring-neutral-300/50">

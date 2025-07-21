@@ -60,12 +60,20 @@ model Session {
   updatedAt DateTime @updatedAt
 }
 
+enum MoodType {
+  ANGRY
+  SAD
+  NEUTRAL
+  OPTIMISTIC
+  ECSTATIC
+}
+
 model Mood {
   id     String @id @default(cuid())
   user   User   @relation(fields: [userId], references: [id])
   userId String
 
-  moodType  String
+  moodType  MoodType
   moodQuote String?
 
   createdAt DateTime @default(now())

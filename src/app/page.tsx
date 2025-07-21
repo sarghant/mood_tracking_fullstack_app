@@ -2,10 +2,11 @@ import Image from "next/image";
 import { auth } from "../../auth";
 import { Button } from "@/ui/button";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  // const session = await auth();
-  // if (session != null) return;
+  const session = await auth();
+  if (session) redirect("/moods");
   return (
     <main className="container h-screen w-full p-8 mt-20 mx-auto">
       {/* Hero text section */}
@@ -32,7 +33,12 @@ export default async function Home() {
             Get Started
           </span>
           <span className="text-xl">⟶</span>
-          <Button variant="cta" size="adaptive" asChild>
+          <Button
+            variant="cta"
+            size="adaptive"
+            asChild
+            className="bg-teal-600 text-teal-50 hover:bg-teal-700 focus:bg-teal-700 disabled:hover:bg-teal-600 disabled:focus:bg-teal-600"
+          >
             <Link href="/sign-in">Log In</Link>
           </Button>
         </div>

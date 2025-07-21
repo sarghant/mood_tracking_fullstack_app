@@ -20,7 +20,6 @@ import ThemeSwitcher from "./ThemeSwitcher";
 const NavBar = ({ session }: { session: Session | null }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user = session?.user;
-  console.log(user);
   return (
     <header className="w-full">
       <nav className="w-full flex items-center justify-between gap-2 lg:max-w-[80vw] mx-auto p-6 lg:p-12">
