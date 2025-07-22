@@ -71,7 +71,7 @@ const MoodsLogger = ({
         <textarea
           name="mood_quote"
           placeholder="Optional: add a quote regarding your current mood."
-          className="w-full max-w-xl min-h-[80px] rounded-lg border border-slate-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-4 py-3 text-base text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-slate-300 shadow-sm transition"
+          className="w-full max-w-xl min-h-[80px] rounded-lg border border-slate-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-4 py-3 text-base text-neutral-800 dark:text-neutral-100 placeholder:text-sm sm:placeholder:text-base placeholder:text-neutral-500 dark:placeholder:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-slate-300 shadow-sm transition"
         ></textarea>
         {/* Hidden input to send current timezone in form data */}
         <input

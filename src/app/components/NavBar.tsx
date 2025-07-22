@@ -21,7 +21,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user = session?.user;
   return (
-    <header className="w-full">
+    <header className="max-xs:min-w-md max-xs:max-w-lg xs:max-sm:min-w-lg xs:max-sm:max-w-xl sm:w-full">
       <nav className="w-full flex items-center justify-between gap-2 lg:max-w-[80vw] mx-auto p-6 lg:p-12">
         {/* App logo */}
         <Link href="/" className="flex items-center gap-2 group">

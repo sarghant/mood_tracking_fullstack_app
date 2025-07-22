@@ -15,3 +15,10 @@ export const forceMidnight = (timezone: string) => {
   tzDate.setHours(0, 0, 0, 0);
   return tzDate;
 };
+
+export const checkTodaysMoodLog = (latestMoodDate: string | undefined) => {
+  if (!latestMoodDate) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today.toISOString() === latestMoodDate;
+};

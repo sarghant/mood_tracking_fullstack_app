@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "../../../auth";
-import { dateFormatter } from "@/lib/date-utils";
+import { checkTodaysMoodLog, dateFormatter } from "@/lib/date-utils";
 import { Button } from "@/ui/button";
 import MoodsLogger from "./components/MoodLogger";
 import { getLatestMood } from "@/lib/getLatestMood";
@@ -21,8 +21,9 @@ const MoodsPage = async () => {
     if (latestMood) return latestMood.moodType === mood.moodType;
     return mood.moodType === "NEUTRAL";
   })?.colors;
+  const hasLoggedMoodToday = checkTodaysMoodLog(latestMood?.date.toISOString());
   return (
-    <div className="container h-screen px-2 mt-8 md:mt-12 mx-auto">
+    <div className="container w-md sm:w-auto h-screen px-2 mt-8 md:mt-12 mx-auto">
       {/* Heading section */}
       <div className="text-center">
         <p className="text-xl md:text-2xl font-semibold text-neutral-700/80 dark:text-neutral-200/70 mb-6">
@@ -42,7 +43,9 @@ const MoodsPage = async () => {
         </p>
       </div>
       {/* Mood logging */}
-      <MoodsLogger currentMoodAccent={currentMoodAccent} />
+      {!hasLoggedMoodToday && (
+        <MoodsLogger currentMoodAccent={currentMoodAccent} />
+      )}
     </div>
   );
 };
