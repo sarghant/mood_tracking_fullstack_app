@@ -4,6 +4,7 @@ import prisma from "@/db/prisma";
 import { MoodType } from "@/generated/prisma";
 import { forceMidnight } from "@/lib/date-utils";
 import { getCurrentUser } from "@/lib/getCurrentUser";
+import { revalidatePath } from "next/cache";
 
 type ActionResponse = {
   success: boolean;
@@ -39,7 +40,8 @@ export async function logMood(
         date: moodDate,
       },
     });
-    return { success: true, message: "Successfully logged user's mood." };
+    revalidatePath("/moods");
+    return { success: true, message: "You have added your daily log!" };
   } catch (error) {
     return {
       success: false,

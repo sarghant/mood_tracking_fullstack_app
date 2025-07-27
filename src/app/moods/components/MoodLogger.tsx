@@ -2,20 +2,27 @@
 
 import { logMood } from "@/actions/moods.actions";
 import { Button } from "@/ui/button";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Image from "next/image";
 import { Mood, moods } from "../constants/moods";
 
 const MoodsLogger = ({
   currentMoodAccent,
+  onMoodNotification,
 }: {
   currentMoodAccent: Mood["colors"] | undefined;
+  onMoodNotification: (message: string) => void;
 }) => {
   const [state, formAction] = useActionState(logMood, {
     success: false,
     message: "",
   });
   const [showForm, setShowForm] = useState(false);
+  useEffect(() => {
+    if (!state.message) return;
+    onMoodNotification(state.message);
+  }, [state.message]);
+  console.log(state.message);
   return (
     <div className="flex flex-col gap-2.5 items-center mt-5">
       <Button

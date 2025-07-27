@@ -6,6 +6,7 @@ import React from "react";
 const buttonVariants = cva("cursor-pointer focus:outline-none", {
   variants: {
     variant: {
+      default: "",
       "nav-link":
         "flex items-center hover:bg-slate-200 dark:hover:bg-gray-800 focus:bg-slate-200 dark:focus:bg-gray-800 group transition-colors",
       "provider-login":
@@ -17,6 +18,7 @@ const buttonVariants = cva("cursor-pointer focus:outline-none", {
       "full-rounded-circle": "w-full gap-4 lg:gap-5 p-2 lg:p-3 rounded-full",
       adaptive:
         "w-full sm:w-auto font-semibold text-nowrap sm:text-lg md:text-xl mx-auto sm:mx-0 py-2 px-6 sm:px-12 md:px-16 sm:py-3 md:py-4 rounded-md sm:rounded-lg",
+      icon: "rounded-full max-w-max max-h-max p-1.5 sm:p-2.5",
     },
   },
   defaultVariants: {

@@ -4,6 +4,8 @@ export type Mood = {
   moodType: MoodType;
   emoji: string;
   name: string;
+  heading: string;
+  upliftingMessage: string;
   colors: {
     foreground: string;
     background: string;
@@ -17,6 +19,8 @@ export const moods: Mood[] = [
     moodType: MoodType["ANGRY"],
     emoji: "/mood_emojis/pouting_face_flat.svg",
     name: "Angry",
+    heading: "Take a Pause",
+    upliftingMessage: "Breathe deeply. You can handle this.",
     colors: {
       foreground: "text-red-600",
       background: "bg-red-600",
@@ -29,6 +33,8 @@ export const moods: Mood[] = [
     moodType: MoodType["SAD"],
     emoji: "/mood_emojis/frowning_face_flat.svg",
     name: "Sad",
+    heading: "It's Okay to Feel Down",
+    upliftingMessage: "You’re not alone. Things will get better.",
     colors: {
       foreground: "text-blue-400/90",
       background: "bg-blue-400/90",
@@ -41,6 +47,8 @@ export const moods: Mood[] = [
     moodType: MoodType["NEUTRAL"],
     emoji: "/mood_emojis/neutral_face_flat.svg",
     name: "Ok",
+    heading: "Stay Balanced",
+    upliftingMessage: "Stay present. You’re doing fine.",
     colors: {
       foreground: "text-teal-500",
       background: "bg-teal-500",
@@ -53,6 +61,8 @@ export const moods: Mood[] = [
     moodType: MoodType["OPTIMISTIC"],
     emoji: "/mood_emojis/slightly_smiling_face_flat.svg",
     name: "Optimistic",
+    heading: "Look Forward",
+    upliftingMessage: "Keep going. Good things are ahead.",
     colors: {
       foreground: "text-yellow-500",
       background: "bg-yellow-600",
@@ -65,6 +75,8 @@ export const moods: Mood[] = [
     moodType: MoodType["ECSTATIC"],
     emoji: "/mood_emojis/smiling_face_with_smiling_eyes_flat.svg",
     name: "Ecstatic",
+    heading: "Celebrate Joy",
+    upliftingMessage: "Enjoy this moment. You deserve it!",
     colors: {
       foreground: "text-amber-700/90",
       background: "bg-amber-600/90",
