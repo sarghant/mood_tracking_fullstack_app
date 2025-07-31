@@ -1,21 +1,23 @@
 "use client";
 
-import { checkTodaysMoodLog } from "@/lib/date-utils";
-import { Mood, moods } from "../constants/moods";
+import { moods } from "../constants/moods";
+import type { MoodDisplayData } from "../constants/moods";
 import MoodsDisplay from "./MoodsDisplay";
-import MoodsLogger from "./MoodLogger";
 import { toast, ToastContainer } from "react-toastify";
 import { Button } from "@/ui/button";
 import Image from "next/image";
 import { useActionState, useEffect, useState } from "react";
 import { logMood } from "@/actions/moods.actions";
 import { XIcon } from "lucide-react";
+import type { Mood } from "@/generated/prisma";
 
 const DailyLog = ({
+  allMoods,
   currentMoodAccent,
   hasLoggedMoodToday,
 }: {
-  currentMoodAccent: Mood["colors"] | undefined;
+  allMoods: Mood[];
+  currentMoodAccent: MoodDisplayData["colors"] | undefined;
   hasLoggedMoodToday: boolean;
 }) => {
   // Form states
@@ -84,7 +86,7 @@ const DailyLog = ({
                       className="hidden peer"
                     />
                     <Image
-                      src={mood.emoji}
+                      src={mood.emoji.svgPath}
                       alt="Mood Emoji"
                       width={56}
                       height={56}
@@ -121,7 +123,10 @@ const DailyLog = ({
           </form>
         </div>
       ) : (
-        <MoodsDisplay currentMoodAccent={currentMoodAccent} />
+        <MoodsDisplay
+          currentMoodAccent={currentMoodAccent}
+          allMoods={allMoods}
+        />
       )}
     </>
   );
