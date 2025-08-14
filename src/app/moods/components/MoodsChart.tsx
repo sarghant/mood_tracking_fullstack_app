@@ -1,34 +1,39 @@
-import type { Mood, MoodType } from "@/generated/prisma";
+import type { MoodType } from "@/generated/prisma";
 import type { MoodDisplayData } from "../constants/moods";
 import { moodChartData } from "../constants/moods";
 import Image from "next/image";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
 import { format } from "date-fns";
-import { LineChart, Line, XAxis, YAxis, Legend, CartesianGrid } from "recharts";
+
+export type ChartDataType = {
+  moodValue: number;
+  date: Date;
+  formattedDate: string;
+  moodType: MoodType;
+  emoji: string;
+  color: string;
+};
 
 const MoodsChart = ({
-  allMoods,
+  chartData,
   currentMoodAccent,
 }: {
-  allMoods: Mood[];
+  chartData: ChartDataType[];
   currentMoodAccent: MoodDisplayData["colors"] | undefined;
 }) => {
-  const chartData = allMoods.map((mood) => {
-    return {
-      moodValue: moodChartData[mood.moodType].value,
-      date: format(new Date(mood.createdAt), "MMM d"),
-      moodType: mood.moodType,
-      emoji: moodChartData[mood.moodType].emoji,
-      color: moodChartData[mood.moodType].color,
-    };
-  });
   return (
     <LineChart
-      width={698}
-      height={328}
+      width={736}
+      height={336}
       data={chartData}
-      margin={{ left: 64, right: 64, bottom: 10, top: 10 }}
+      margin={{ left: 68, right: 48, bottom: 10, top: 10 }}
+      className="max-w-full md:flex-grow"
     >
-      <CartesianGrid stroke={currentMoodAccent?.chart} strokeDasharray="5 5" />
+      <CartesianGrid
+        stroke={currentMoodAccent?.chart}
+        strokeDasharray="5 5"
+        strokeWidth={3}
+      />
       <Line
         type="monotone"
         dataKey="moodValue"
@@ -37,10 +42,23 @@ const MoodsChart = ({
         name="Your moods over time"
         dot={CustomDot}
       />
-      <XAxis dataKey="date" tickMargin={10} />
+      <XAxis
+        dataKey="formattedDate"
+        allowDataOverflow={true}
+        tickMargin={10}
+        tick={({ payload, x, y }) => {
+          return (
+            <foreignObject x={x - 16} y={y} width={48} height={28}>
+              <span className="text-foreground font-medium">
+                {payload.value}
+              </span>
+            </foreignObject>
+          );
+        }}
+      />
       <YAxis
         allowDecimals={false}
-        tickMargin={15}
+        tickMargin={8}
         width={40}
         tick={CustomTick}
       />
@@ -57,37 +75,19 @@ function CustomTick({
   y: number;
   payload: { value: number };
 }) {
-  let path = "";
   const { name, color } = Object.values(moodChartData)[payload.value];
   const textColor = `text-[${color}]`;
-  switch (payload.value) {
-    case 0:
-      path = "/mood_emojis/pouting_face_flat.svg";
-      break;
-    case 1:
-      path = "/mood_emojis/frowning_face_flat.svg";
-      break;
-    case 2:
-      path = "/mood_emojis/neutral_face_flat.svg";
-      break;
-    case 3:
-      path = "/mood_emojis/slightly_smiling_face_flat.svg";
-      break;
-    case 4:
-      path = "/mood_emojis/smiling_face_with_smiling_eyes_flat.svg";
-      break;
-  }
   return (
     <foreignObject
       key={payload.value}
-      x={x - 64}
+      x={x - 128}
       y={y - 14}
       width={128}
       height={28}
     >
       <span
         style={{ color: color }}
-        className={`${textColor} text-shadow-2xs text-shadow-black/15 text-lg font-semibold`}
+        className={`${textColor} text-shadow-2xs block text-right text-shadow-black/30 text-lg sm:text-xl font-semibold`}
       >
         {name}
       </span>
@@ -102,10 +102,9 @@ function CustomDot({
 }: {
   cx: number;
   cy: number;
-  payload: { moodType: MoodType };
+  payload: { moodType: MoodType; date: string };
 }) {
   let path = "";
-  // console.log(payload);
   switch (payload.moodType) {
     case "ANGRY":
       path = "/mood_emojis/pouting_face_flat.svg";
@@ -126,7 +125,13 @@ function CustomDot({
       path = "/mood_emojis/neutral_face_flat.svg";
   }
   return (
-    <foreignObject x={cx - 20} y={cy - 32} width={40} height={40}>
+    <foreignObject
+      key={payload.date}
+      x={cx - 20}
+      y={cy - 32}
+      width={40}
+      height={40}
+    >
       <Image src={path} alt="Mood Emoji" width={40} height={40} />
     </foreignObject>
   );

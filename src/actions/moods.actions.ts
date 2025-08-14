@@ -27,8 +27,6 @@ export async function logMood(
     const moodType = formData.get("mood_type") as MoodType;
     const moodQuote = formData.get("mood_quote") as string;
     const timezone = formData.get("timezone") as string;
-    if (!moodType)
-      return { success: false, message: "You haven't picked your mood yet." };
     if (!timezone) throw Error("");
     const moodDate = forceMidnight(timezone);
     // Create mood

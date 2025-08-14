@@ -16,10 +16,30 @@ import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { Button } from "@/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useEffect, useRef } from "react";
 
 const NavBar = ({ session }: { session: Session | null }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user = session?.user;
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isExpanded) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsExpanded(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isExpanded]);
   return (
     <header className="max-xs:min-w-md max-xs:max-w-lg xs:max-sm:min-w-lg xs:max-sm:max-w-xl sm:w-full">
       <nav className="w-full flex items-center justify-between gap-2 lg:max-w-[80vw] mx-auto p-6 lg:p-12">
@@ -71,6 +91,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
           </button>
           {/* Dropdown */}
           <div
+            ref={dropdownRef}
             className={`absolute top-full right-0 mt-4 p-4 space-y-1.5 w-xl max-w-[256px] overflow-hidden rounded-xl ring-1 dark:ring-2 ring-slate-700/4 dark:ring-neutral-300/30 bg-slate-100 dark:bg-gray-700 shadow-md origin-top ${
               isExpanded
                 ? "rotate-x-0 opacity-100 z-50"

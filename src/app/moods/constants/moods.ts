@@ -66,7 +66,7 @@ export const moods: MoodDisplayData[] = [
     upliftingMessage: "Stay present. You’re doing fine.",
     colors: {
       foreground: "text-teal-500",
-      chart: "#14b8a6",
+      chart: "#24b896",
       background: "bg-teal-500",
       hoverBackground:
         "hover:bg-teal-600 focus:bg-teal-600 disabled:hover:bg-teal-500 disabled:focus:bg-teal-500",
@@ -84,7 +84,7 @@ export const moods: MoodDisplayData[] = [
     upliftingMessage: "Keep going. Good things are ahead.",
     colors: {
       foreground: "text-yellow-500",
-      chart: "#facc15",
+      chart: "#cabc25",
       background: "bg-yellow-600",
       hoverBackground:
         "hover:bg-yellow-700 focus:bg-yellow-700 disabled:hover:bg-yellow-600 disabled:focus:bg-yellow-600",
@@ -102,7 +102,7 @@ export const moods: MoodDisplayData[] = [
     upliftingMessage: "Enjoy this moment. You deserve it!",
     colors: {
       foreground: "text-amber-700/90",
-      chart: "#fbbf24",
+      chart: "#fb8f24",
       background: "bg-amber-600/90",
       hoverBackground:
         "hover:bg-amber-700/90 focus:bg-amber-700/90 disabled:hover:bg-amber-600/90 disabled:focus:bg-amber-600/90",

@@ -1,17 +1,16 @@
 import { redirect } from "next/navigation";
 import { auth } from "../../../auth";
 import { checkTodaysMoodLog, dateFormatter } from "@/lib/date-utils";
-import { getLatestMood } from "@/lib/getLatestMood";
+import { getAllMoods, getLatestMood } from "@/lib/getLatestMood";
 import { MoodDisplayData, moods } from "./constants/moods";
 import DailyLog from "./components/DailyLog";
-import prisma from "@/db/prisma";
 
 const MoodsPage = async () => {
   const session = await auth();
   if (!session) redirect("/");
   const user = session.user;
   if (!user) return null;
-  const allMoods = await prisma.mood.findMany({ where: { userId: user.id } });
+  const allMoods = await getAllMoods();
   const latestMood = await getLatestMood();
   const currentMood = moods.find((mood) => {
     if (latestMood) return latestMood.moodType === mood.moodType;
@@ -22,7 +21,7 @@ const MoodsPage = async () => {
     latestMood?.date?.toISOString()
   );
   return (
-    <div className="container w-md sm:w-auto h-screen px-2 mt-8 md:mt-12 mx-auto">
+    <div className="container relative w-md sm:w-auto h-screen px-2 mt-8 md:mt-12 mx-auto">
       {/* Heading section */}
       <div className="text-center">
         <p className="text-xl md:text-2xl font-semibold text-neutral-700/80 dark:text-neutral-200/70 mb-6">
@@ -55,7 +54,7 @@ const MoodsPage = async () => {
       </div>
       {/* Mood logging */}
       <DailyLog
-        allMoods={allMoods}
+        allMoods={allMoods!}
         currentMoodAccent={colors}
         hasLoggedMoodToday={hasLoggedMoodToday}
       />

@@ -26,17 +26,29 @@ const DailyLog = ({
     message: "",
   });
   const [showForm, setShowForm] = useState(false);
+  const [hasPickedMood, setHasPickedMood] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  function handleAction(payload: FormData) {
+    if (!hasPickedMood) {
+      setErrorMessage("You haven't picked your mood yet.");
+      return;
+    }
+    formAction(payload);
+  }
 
   useEffect(() => {
     if (!state.message) return;
-    if (state.success) toast.success(state.message);
-    else toast.error(state.message);
+    if (state.success) {
+      toast.success(state.message);
+      setShowForm(false);
+    } else toast.error(state.message);
   }, [state, toast]);
   return (
     <>
       <ToastContainer position="bottom-center" hideProgressBar={true} />
       {/* Mood logger form */}
-      {!hasLoggedMoodToday ? (
+      {!hasLoggedMoodToday && (
         <div className="flex flex-col gap-2.5 items-center mt-5">
           <Button
             variant="cta"
@@ -44,27 +56,39 @@ const DailyLog = ({
             className={`${currentMoodAccent?.background} ${
               currentMoodAccent?.hoverBackground
             } disabled:grayscale-[80%] disabled:brightness-[80%] ${
-              showForm ? "opacity-0 hidden" : "opacity-100 visible"
+              showForm ? "opacity-0 invisible" : "opacity-100 visible"
             } transition-all`}
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              setShowForm(true);
+              setErrorMessage("");
+            }}
             disabled={showForm}
           >
             Let's reflect on it
           </Button>
+          {showForm && (
+            <div
+              className="fixed inset-0 z-40 bg-black/10 dark:bg-black/30"
+              onClick={() => setShowForm(false)}
+              aria-label="Hide Form"
+            />
+          )}
           <form
-            action={formAction}
-            className={`relative mx-auto my-5 p-6 md:p-10 flex flex-col items-center gap-3 md:gap-6 
+            action={handleAction}
+            className={`absolute mx-auto my-5 p-6 md:p-10 flex flex-col items-center gap-3 md:gap-6 
       w-max bg-slate-100 dark:bg-neutral-700/60 shadow-md rounded-lg ${
         showForm
-          ? "rotate-x-0 -translate-y-[5%] opacity-100"
-          : "rotate-x-90 -translate-y-full opacity-0"
+          ? "rotate-x-0 -translate-y-0 opacity-100 z-50"
+          : "rotate-x-90 -translate-y-full opacity-0 -z-50"
       } transition-all duration-300`}
           >
             {/* Close button */}
             <Button
               variant="default"
               size="icon"
-              onClick={() => setShowForm(false)}
+              onClick={() => {
+                setShowForm(false);
+              }}
               className="absolute top-4 right-4 ring-1 ring-foreground/50 hover:bg-background/60 focus:bg-background/60 transition-colors"
             >
               <XIcon />
@@ -84,6 +108,10 @@ const DailyLog = ({
                       name="mood_type"
                       value={mood.moodType}
                       className="hidden peer"
+                      onChange={() => {
+                        setErrorMessage("");
+                        setHasPickedMood(true);
+                      }}
                     />
                     <Image
                       src={mood.emoji.svgPath}
@@ -100,6 +128,11 @@ const DailyLog = ({
                   </label>
                 ))}
               </div>
+              {errorMessage && (
+                <p className="text-red-600 font-medium text-center mt-3">
+                  {errorMessage}
+                </p>
+              )}
             </fieldset>
             <textarea
               name="mood_quote"
@@ -122,12 +155,13 @@ const DailyLog = ({
             </Button>
           </form>
         </div>
-      ) : (
-        <MoodsDisplay
-          currentMoodAccent={currentMoodAccent}
-          allMoods={allMoods}
-        />
       )}
+      <MoodsDisplay
+        showForm={showForm}
+        hasLoggedMoodToday={hasLoggedMoodToday}
+        currentMoodAccent={currentMoodAccent}
+        allMoods={allMoods}
+      />
     </>
   );
 };
