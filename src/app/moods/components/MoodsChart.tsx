@@ -3,7 +3,6 @@ import type { MoodDisplayData } from "../constants/moods";
 import { moodChartData } from "../constants/moods";
 import Image from "next/image";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
-import { format } from "date-fns";
 
 export type ChartDataType = {
   moodValue: number;
@@ -26,7 +25,7 @@ const MoodsChart = ({
       width={736}
       height={336}
       data={chartData}
-      margin={{ left: 68, right: 48, bottom: 10, top: 10 }}
+      margin={{ left: 90, right: 70, bottom: 10, top: 10 }}
       className="max-w-full md:flex-grow"
     >
       <CartesianGrid
@@ -48,7 +47,7 @@ const MoodsChart = ({
         tickMargin={10}
         tick={({ payload, x, y }) => {
           return (
-            <foreignObject x={x - 16} y={y} width={48} height={28}>
+            <foreignObject x={x - 24} y={y} width={64} height={28}>
               <span className="text-foreground font-medium">
                 {payload.value}
               </span>

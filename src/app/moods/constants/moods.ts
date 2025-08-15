@@ -117,7 +117,7 @@ export const moodChartData = Object.fromEntries(
       mood.moodType,
       {
         value: i,
-        emoji: mood.emoji.icon,
+        emoji: mood.emoji.svgPath,
         name: mood.name,
         color: mood.colors.chart,
       },
