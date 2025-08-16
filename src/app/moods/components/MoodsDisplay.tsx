@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { getAverageMood } from "@/lib/getAverageMood";
 import { useState } from "react";
 import Image from "next/image";
+import { Switch } from "@headlessui/react"; // If you use headlessui, otherwise use a simple checkbox
 
 enum DurationValue {
   SEVEN_DAYS = "7",
@@ -30,6 +31,7 @@ const MoodsDisplay = ({
   const [durationValue, setDurationValue] = useState<DurationValue>(
     DurationValue.SEVEN_DAYS
   );
+  const [showBarChart, setShowBarChart] = useState(false); // Chart type toggler
 
   const currentMood = allMoods[0];
   const chartData = allMoods
@@ -110,8 +112,32 @@ const MoodsDisplay = ({
             </p>
           )}
         </div>
+        <div className="flex items-center gap-3 mt-2">
+          <label htmlFor="chartTypeToggle" className="font-medium text-base">
+            Chart Type:
+          </label>
+          <Switch
+            checked={showBarChart}
+            onChange={setShowBarChart}
+            className={`${
+              showBarChart ? "bg-cyan-600" : "bg-gray-300"
+            } relative inline-flex h-6 w-11 items-center rounded-full transition-colors`}
+            id="chartTypeToggle"
+          >
+            <span
+              className={`${
+                showBarChart ? "translate-x-6" : "translate-x-1"
+              } inline-block h-4 w-4 transform bg-white rounded-full transition-transform`}
+            />
+          </Switch>
+          <span className="ml-2 text-sm">{showBarChart ? "Bar" : "Line"}</span>
+        </div>
       </div>
-      <MoodsChart chartData={chartData} currentMoodAccent={currentMoodAccent} />
+      <MoodsChart
+        chartData={chartData}
+        currentMoodAccent={currentMoodAccent}
+        showBarChart={showBarChart}
+      />
     </div>
   );
 };

@@ -2,7 +2,16 @@ import type { MoodType } from "@/generated/prisma";
 import type { MoodDisplayData } from "../constants/moods";
 import { moodChartData } from "../constants/moods";
 import Image from "next/image";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Cell,
+} from "recharts";
 
 export type ChartDataType = {
   moodValue: number;
@@ -16,10 +25,77 @@ export type ChartDataType = {
 const MoodsChart = ({
   chartData,
   currentMoodAccent,
+  showBarChart = false,
 }: {
   chartData: ChartDataType[];
   currentMoodAccent: MoodDisplayData["colors"] | undefined;
+  showBarChart?: boolean;
 }) => {
+  if (showBarChart) {
+    return (
+      <BarChart
+        width={736}
+        height={336}
+        data={chartData}
+        margin={{ left: 90, right: 70, bottom: 10, top: 10 }}
+        className="max-w-full md:flex-grow"
+      >
+        <CartesianGrid
+          stroke={currentMoodAccent?.chart}
+          strokeDasharray="5 5"
+          strokeWidth={3}
+        />
+        <Bar
+          dataKey="moodValue"
+          name="Your moods over time"
+          label={({ x, y, width, index }) => (
+            <foreignObject
+              x={x + width / 2 - 16}
+              y={y - 20}
+              width={32}
+              height={32}
+              style={{ overflow: "visible" }}
+            >
+              <Image
+                src={chartData[index].emoji}
+                alt="Mood Emoji"
+                width={32}
+                height={32}
+                style={{
+                  display: "block",
+                  margin: 0,
+                  pointerEvents: "none",
+                }}
+              />
+            </foreignObject>
+          )}
+        >
+          {chartData.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Bar>
+        <XAxis
+          dataKey="formattedDate"
+          allowDataOverflow={true}
+          tickMargin={10}
+          tick={({ payload, x, y }) => (
+            <foreignObject x={x - 24} y={y} width={64} height={28}>
+              <span className="text-foreground font-medium">
+                {payload.value}
+              </span>
+            </foreignObject>
+          )}
+        />
+        <YAxis
+          allowDecimals={false}
+          tickMargin={8}
+          width={40}
+          tick={CustomTick}
+        />
+      </BarChart>
+    );
+  }
+
   return (
     <LineChart
       width={736}
@@ -45,15 +121,11 @@ const MoodsChart = ({
         dataKey="formattedDate"
         allowDataOverflow={true}
         tickMargin={10}
-        tick={({ payload, x, y }) => {
-          return (
-            <foreignObject x={x - 24} y={y} width={64} height={28}>
-              <span className="text-foreground font-medium">
-                {payload.value}
-              </span>
-            </foreignObject>
-          );
-        }}
+        tick={({ payload, x, y }) => (
+          <foreignObject x={x - 24} y={y} width={64} height={28}>
+            <span className="text-foreground font-medium">{payload.value}</span>
+          </foreignObject>
+        )}
       />
       <YAxis
         allowDecimals={false}
