@@ -55,7 +55,7 @@ const MoodsDisplay = ({
         showForm
           ? "pointer-events-none opacity-50 brightness-75 select-none"
           : "pointer-events-auto opacity-100 brightness-100"
-      } transition-all max-w-full sm:max-w-[86rem] mx-auto mt-12 mb-8 py-12 px-4 sm:py-16 sm:px-12 flex flex-col lg:flex-row gap-2 sm:gap-4 items-center md:justify-between bg-slate-300/40 dark:bg-gray-700 shadow-lg rounded-lg`}
+      } transition-all max-w-full sm:max-w-[86rem] mx-auto mt-12 mb-8 py-12 px-4 sm:py-16 sm:px-12 flex flex-col lg:flex-row gap-2 sm:gap-4 items-center md:justify-between bg-[#d9e2ef] dark:bg-gray-700 shadow-lg rounded-lg`}
     >
       <div className="space-y-2 sm:space-y-4 text-center md:text-start">
         <h2 className="mb-4 font-bold font-serif tracking-wide sm:text-lg md:text-2xl">
