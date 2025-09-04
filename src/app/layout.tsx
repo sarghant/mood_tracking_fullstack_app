@@ -4,8 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import NavBar from "./components/NavBar";
 import { auth } from "../../auth";
-import BackgroundEffects from "./components/BackgroundEffects";
-import BackgroundEffects2 from "./components/BackgroundEffects2";
+import BackgroundEffects2 from "./components/BackgroundEffects";
+import Footer from "./components/Footer";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -30,11 +30,14 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${nunito.variable} ${lora.variable} antialiased`}>
+      <body
+        className={`${nunito.variable} ${lora.variable} antialiased h-screen`}
+      >
         <ThemeProvider defaultTheme="light">
           <BackgroundEffects2 />
           <NavBar session={session} />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -9,14 +9,19 @@ import { useRef } from "react";
 gsap.registerPlugin(useGSAP);
 
 const imgPaths = [
-  "mood_emojis/pouting_face_flat.svg",
-  "mood_emojis/frowning_face_flat.svg",
-  "mood_emojis/neutral_face_flat.svg",
-  "mood_emojis/slightly_smiling_face_flat.svg",
-  "mood_emojis/smiling_face_with_smiling_eyes_flat.svg",
+  "mood_emojis/pouting_face_color.svg",
+  "mood_emojis/frowning_face_color.svg",
+  "mood_emojis/neutral_face_color.svg",
+  "/mood_emojis/slightly_smiling_face_color.svg",
+  "mood_emojis/smiling_face_with_smiling_eyes_color.svg",
+  // "mood_emojis/pouting_face_flat.svg",
+  // "mood_emojis/frowning_face_flat.svg",
+  // "mood_emojis/neutral_face_flat.svg",
+  // "/mood_emojis/slightly_smiling_face_flat.svg",
+  // "mood_emojis/smiling_face_with_smiling_eyes_flat.svg",
 ];
 
-const BackgroundEffects2 = () => {
+const BackgroundEffects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   useFloatingEmojis(containerRef);
   return (
@@ -66,4 +71,4 @@ const BackgroundEffects2 = () => {
   );
 };
 
-export default BackgroundEffects2;
+export default BackgroundEffects;

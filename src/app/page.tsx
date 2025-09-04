@@ -3,22 +3,16 @@ import { auth } from "../../auth";
 import { Button } from "@/ui/button";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import AnimatedHeadingEmoji from "./components/AnimatedHeadingEmoji";
 
 export default async function Home() {
   const session = await auth();
   if (session) redirect("/moods");
   return (
-    <main className="container h-screen w-full p-8 mt-20 mx-auto">
+    <main className="container w-full p-8 mt-20 mx-auto">
       {/* Hero text section */}
       <div className="text-center">
-        <div className="mx-auto w-24 md:min-w-max mb-8">
-          <Image
-            width={112}
-            height={112}
-            src="/icons/slightly_smiling_face_3d.png"
-            alt="Smiley Face Heading Icon"
-          />
-        </div>
+        <AnimatedHeadingEmoji />
         <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
           Discover a brighter you:
           <br />

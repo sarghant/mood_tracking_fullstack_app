@@ -21,7 +21,7 @@ const MoodsPage = async () => {
     latestMood?.date?.toISOString()
   );
   return (
-    <div className="container relative w-md sm:w-auto h-screen px-2 mt-8 md:mt-12 mx-auto">
+    <div className="container relative w-md sm:w-auto px-2 mt-8 md:mt-12 mx-auto">
       {/* Heading section */}
       <div className="text-center">
         <p className="text-xl md:text-2xl font-semibold text-neutral-700/80 dark:text-neutral-200/70 mb-6">
