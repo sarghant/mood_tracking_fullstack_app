@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 import type { Provider } from "next-auth/providers";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/db/prisma";
 
-const providers: Provider[] = [GitHub];
+const providers: Provider[] = [GitHub, Google];
 
 export const providersMap = providers
   .map((provider) => {

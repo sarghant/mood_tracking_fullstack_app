@@ -1,6 +1,6 @@
 import { Button } from "@/ui/button";
 import { signIn, providersMap, auth } from "../../../auth";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { redirect } from "next/navigation";
 
 const SignInPage = async () => {
@@ -10,7 +10,7 @@ const SignInPage = async () => {
   }
   return (
     <div className="container mt-48 sm:mt-80 mx-auto">
-      <div className="mx-auto w-md h-[248px] p-8 rounded-lg bg-slate-50 dark:bg-gray-600 shadow-md ring-1 dark:ring-2 ring-neutral-300 dark:ring-neutral-300/50">
+      <div className="mx-auto w-md min-h-[248px] max-h-max p-8 rounded-lg bg-slate-50 dark:bg-gray-600 shadow-md ring-1 dark:ring-2 ring-neutral-300 dark:ring-neutral-300/50">
         <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-8 text-center">
           Login
         </h2>
@@ -35,6 +35,7 @@ const SignInPage = async () => {
                     className="text-slate-900 dark:text-neutral-50"
                   />
                 )}
+                {provider.name === "Google" && <FaGoogle size={40} />}
               </div>
               <span className="font-medium md:text-lg">
                 Sign in with {provider.name}

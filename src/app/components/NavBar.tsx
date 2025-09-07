@@ -63,7 +63,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
           ></div>
         </div>
         {/* User */}
-        <div className="relative">
+        <div ref={dropdownRef} className="relative">
           <button
             type="button"
             className="flex items-center gap-2 cursor-pointer focus:outline-none"
@@ -91,7 +91,6 @@ const NavBar = ({ session }: { session: Session | null }) => {
           </button>
           {/* Dropdown */}
           <div
-            ref={dropdownRef}
             className={`absolute top-full right-0 mt-4 p-4 space-y-1.5 w-xl max-w-[256px] overflow-hidden rounded-xl ring-1 dark:ring-2 ring-slate-700/4 dark:ring-neutral-300/30 bg-slate-100 dark:bg-gray-700 shadow-md origin-top ${
               isExpanded
                 ? "rotate-x-0 opacity-100 z-50"

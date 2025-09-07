@@ -32,7 +32,7 @@ const MoodsDisplay = ({
     DurationValue.SEVEN_DAYS
   );
   const [showBarChart, setShowBarChart] = useState(false); // Chart type toggler
-
+  if (allMoods.length === 0) return;
   const currentMood = allMoods[0];
   const chartData = allMoods
     .slice(0)
