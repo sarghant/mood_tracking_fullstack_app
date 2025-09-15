@@ -2,12 +2,19 @@ import prisma from "@/db/prisma";
 import { auth } from "../../auth";
 import { User } from "@/generated/prisma";
 
+const isDev = process.env.NODE_ENV === "development";
+
 export async function getCurrentUser(): Promise<Partial<User> | null> {
   try {
     const session = await auth();
     if (!session) return null;
     const { user } = session;
-    if (!user) return null;
+    if (!user?.id) {
+      logError("Session exists but missing either user or user.id.", {
+        session,
+      });
+      return null;
+    }
     const userData = await prisma.user.findUnique({
       where: { id: user.id },
       select: {
@@ -15,9 +22,20 @@ export async function getCurrentUser(): Promise<Partial<User> | null> {
         email: true,
       },
     });
+    if (!userData) {
+      logError("User not found.", { userId: user.id, session });
+      return null;
+    }
     return userData;
   } catch (error) {
-    console.log(`User Data Retrieval Error: ${error}`);
+    if (isDev)
+      logError("User data error: ", {
+        error: error instanceof Error ? error.message : error,
+      });
     return null;
   }
+}
+
+function logError(message: string, context?: any) {
+  if (isDev) console.error(message, context);
 }

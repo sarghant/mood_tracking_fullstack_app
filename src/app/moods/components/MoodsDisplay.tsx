@@ -107,8 +107,9 @@ const MoodsDisplay = ({
               />
             </div>
           ) : (
-            <p className="text-xl md:text-2xl lg:text-3xl font-medium">
-              "No data available yet. Please log some moods!"
+            <p className="md:text-lg lg:text-xl font-medium">
+              No data available for the selected duration. Please log some
+              moods!
             </p>
           )}
         </div>
