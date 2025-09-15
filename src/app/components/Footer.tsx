@@ -23,8 +23,14 @@ const Footer = () => {
           </span>{" "}
           · Next.js, Prisma & Neon.
         </p>
+        <Link
+          href="/privacy"
+          className="mt-2 sm:mt-0 text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-300"
+        >
+          Privacy Policy
+        </Link>
         {/* Emoji Credits */}
-        <p className="mt-2 sm:mt-0 text-xs text-gray-500 dark:text-gray-500">
+        <p className="mt-2 sm:mt-0 text-xs text-gray-500">
           Emoji graphics provided by{" "}
           <a
             href="https://github.com/microsoft/fluentui-emoji"
