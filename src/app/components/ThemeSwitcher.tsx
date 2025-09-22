@@ -27,11 +27,13 @@ const ThemeSwitcher = () => {
       >
         {theme === "light" ? (
           <SunIcon
+            aria-label="Sun Icon"
             size={28}
             className="text-amber-700/90 group-hover:text-amber-600/70 group-focus:text-amber-600/70 transition-colors"
           />
         ) : (
           <MoonIcon
+            aria-label="Moon Icon"
             size={28}
             className="text-amber-300 group-hover:text-amber-200 group-focus:text-amber-200 transition-colors"
           />
@@ -41,13 +43,15 @@ const ThemeSwitcher = () => {
       <div
         className={`absolute inset-0 flex gap-2 items-center justify-center ${
           isExpanded
-            ? "translate-x-0 opacity-100"
-            : "translate-x-full opacity-0"
+            ? "translate-x-0 opacity-100 pointer-events-auto"
+            : "translate-x-full opacity-0 pointer-events-none"
         } transition`}
       >
         <Button
           type="button"
           size="full-rounded-circle"
+          aria-hidden={!isExpanded}
+          tabIndex={isExpanded ? 0 : -1}
           className={`justify-center ring-1 ring-gray-600/60 dark:ring-white/40 ${
             theme === "light" ? "bg-slate-300/70" : ""
           }`}
@@ -62,6 +66,8 @@ const ThemeSwitcher = () => {
         <Button
           type="button"
           size="full-rounded-circle"
+          aria-hidden={!isExpanded}
+          tabIndex={isExpanded ? 0 : -1}
           className={`justify-center ring-1 ring-gray-600/60 dark:ring-white/40 ${
             theme === "dark" ? "bg-gray-800/60" : ""
           }`}
