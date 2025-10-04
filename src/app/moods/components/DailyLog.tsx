@@ -53,6 +53,7 @@ const DailyLog = ({
           <Button
             variant="cta"
             size="adaptive"
+            aria-label="Show Form"
             className={`${currentMoodAccent?.background} ${
               currentMoodAccent?.hoverBackground
             } disabled:grayscale-[80%] disabled:brightness-[80%] ${
@@ -74,18 +75,23 @@ const DailyLog = ({
             />
           )}
           <form
+            role="form"
             action={handleAction}
+            aria-hidden={!showForm}
             className={`absolute mx-auto my-5 p-6 md:p-10 flex flex-col items-center gap-3 md:gap-6 
       w-max bg-slate-100 dark:bg-neutral-700/60 shadow-md rounded-lg ${
         showForm
-          ? "rotate-x-0 -translate-y-0 opacity-100 z-50"
-          : "rotate-x-90 -translate-y-full opacity-0 -z-50"
+          ? "rotate-x-0 translate-y-0 opacity-100 z-50 pointer-events-auto"
+          : "rotate-x-90 -translate-y-full opacity-0 -z-50 pointer-events-none"
       } transition-all duration-300`}
           >
             {/* Close button */}
             <Button
+              type="button"
               variant="default"
               size="icon"
+              aria-label="Hide Form Button"
+              aria-hidden={!showForm}
               onClick={() => {
                 setShowForm(false);
               }}
@@ -129,7 +135,10 @@ const DailyLog = ({
                 ))}
               </div>
               {errorMessage && (
-                <p className="text-red-600 font-medium text-center mt-3">
+                <p
+                  role="alert"
+                  className="text-red-600 font-medium text-center mt-3"
+                >
                   {errorMessage}
                 </p>
               )}
