@@ -1,7 +1,7 @@
 import { ChartDataType } from "@/app/moods/components/MoodsChart";
 
 export function getAverageMood(data: ChartDataType[], durationValue: number) {
-  let startDate =
+  const startDate =
     durationValue === 0 ? 0 : Date.now() - durationValue * 24 * 60 * 60 * 1000;
   const filteredData = data.filter(
     (item) => new Date(item.date).getTime() >= startDate

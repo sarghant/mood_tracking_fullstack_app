@@ -1,6 +1,6 @@
 import prisma from "@/db/prisma";
 import { auth } from "../../auth";
-import { User } from "@/generated/prisma";
+import { User } from "@prisma/client";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -36,6 +36,6 @@ export async function getCurrentUser(): Promise<Partial<User> | null> {
   }
 }
 
-function logError(message: string, context?: any) {
+function logError(message: string, context?: unknown) {
   if (isDev) console.error(message, context);
 }

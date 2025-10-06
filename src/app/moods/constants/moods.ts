@@ -1,4 +1,4 @@
-import { MoodType } from "@/generated/prisma";
+import { MoodType } from "@prisma/client";
 
 export type MoodDisplayData = {
   moodType: MoodType;

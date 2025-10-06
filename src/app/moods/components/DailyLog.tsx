@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useActionState, useEffect, useState } from "react";
 import { logMood } from "@/actions/moods.actions";
 import { XIcon } from "lucide-react";
-import type { Mood } from "@/generated/prisma";
+import type { Mood } from "@prisma/client";
 
 const DailyLog = ({
   allMoods,
@@ -43,7 +43,7 @@ const DailyLog = ({
       toast.success(state.message);
       setShowForm(false);
     } else toast.error(state.message);
-  }, [state, toast]);
+  }, [state]);
   return (
     <>
       <ToastContainer position="bottom-center" hideProgressBar={true} />
@@ -65,7 +65,7 @@ const DailyLog = ({
             }}
             disabled={showForm}
           >
-            Let's reflect on it
+            Let&apos;s reflect on it
           </Button>
           {showForm && (
             <div
@@ -101,7 +101,7 @@ const DailyLog = ({
             </Button>
             <fieldset>
               <legend className="text-xl font-semibold text-center mb-5">
-                What's your mood right now?
+                What&apos;s your mood right now?
               </legend>
               <div className="flex gap-5 md:gap-8 justify-center">
                 {moods.map((mood) => (

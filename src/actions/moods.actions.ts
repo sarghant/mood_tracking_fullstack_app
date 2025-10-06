@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/db/prisma";
-import { MoodType } from "@/generated/prisma";
+import { MoodType } from "@prisma/client";
 import { forceMidnight } from "@/lib/date-utils";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { revalidatePath } from "next/cache";
@@ -40,7 +40,7 @@ export async function logMood(
     });
     revalidatePath("/moods");
     return { success: true, message: "You have added your daily log!" };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "Something went wrong. Please, try again.",

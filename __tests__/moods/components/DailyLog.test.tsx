@@ -9,7 +9,7 @@ import { userEvent } from "@testing-library/user-event";
 import DailyLog from "@/app/moods/components/DailyLog";
 import { logMood } from "@/actions/moods.actions";
 import { toast, ToastContainer } from "react-toastify";
-import { Mood, MoodType } from "@/generated/prisma";
+import { Mood, MoodType } from "@prisma/client";
 import { MoodDisplayData } from "@/app/moods/constants/moods";
 
 jest.mock("@/actions/moods.actions", () => ({

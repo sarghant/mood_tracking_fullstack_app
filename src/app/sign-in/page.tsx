@@ -1,6 +1,6 @@
 import { Button } from "@/ui/button";
 import { signIn, providersMap, auth } from "../../../auth";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { redirect } from "next/navigation";
 import { GoogleIcon } from "../components/custom-icons";
 import Link from "next/link";

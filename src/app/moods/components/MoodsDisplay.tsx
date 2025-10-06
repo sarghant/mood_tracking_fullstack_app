@@ -1,7 +1,7 @@
 "use client";
 
 import { moodChartData, type MoodDisplayData } from "../constants/moods";
-import type { Mood } from "@/generated/prisma";
+import type { Mood } from "@prisma/client";
 import MoodsChart from "./MoodsChart";
 import { format } from "date-fns";
 import { getAverageMood } from "@/lib/getAverageMood";
@@ -36,7 +36,10 @@ const MoodsDisplay = ({
   const currentMood = allMoods[0];
   const chartData = allMoods
     .slice(0)
-    .sort((a: any, b: any) => a.date - b.date)
+    .sort(
+      (a: Mood, b: Mood) =>
+        new Date(a.date).getTime() - new Date(b.date).getTime()
+    )
     .map((mood) => {
       return {
         moodValue: moodChartData[mood.moodType].value,

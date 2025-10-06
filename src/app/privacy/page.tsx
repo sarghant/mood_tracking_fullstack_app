@@ -23,7 +23,7 @@ const PrivacyPolicyPage = () => {
         <h2 className="text-2xl font-semibold">What This App Does</h2>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
           This mood tracking app allows you to log your daily moods and view
-          your mood history. It's built as a demonstration of modern web
+          your mood history. It&apos;s built as a demonstration of modern web
           technologies including Next.js, Auth.js, and Prisma.
         </p>
       </section>
@@ -40,7 +40,7 @@ const PrivacyPolicyPage = () => {
             <li>Your name and email from your chosen provider</li>
             <li>Your profile picture (if available)</li>
             <li>
-              We don't store your passwords - authentication is handled by
+              We don&apos;t store your passwords - authentication is handled by
               GitHub/Google
             </li>
           </ul>
@@ -82,8 +82,8 @@ const PrivacyPolicyPage = () => {
         <h2 className="text-2xl font-semibold">Data Security</h2>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
           Your data is stored securely using industry-standard practices.
-          However, as this is a demonstration app, please don't rely on it for
-          storing sensitive or critical information.
+          However, as this is a demonstration app, please don&apos;t rely on it
+          for storing sensitive or critical information.
         </p>
       </section>
 

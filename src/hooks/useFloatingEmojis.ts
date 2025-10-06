@@ -8,7 +8,7 @@ export function useFloatingEmojis(
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    const emojis = gsap.utils.toArray(".floating-emoji");
+    const emojis = gsap.utils.toArray(".floating-emoji") as HTMLElement[];
 
     gsap.set(emojis, { opacity: 0, scale: 0.8 });
     gsap.to(emojis, {
@@ -21,7 +21,7 @@ export function useFloatingEmojis(
         from: "random",
       },
     });
-    emojis.forEach((emoji: any, index) => {
+    emojis.forEach((emoji, index) => {
       const element = emoji as HTMLElement;
 
       const floatTimeline = gsap.timeline({

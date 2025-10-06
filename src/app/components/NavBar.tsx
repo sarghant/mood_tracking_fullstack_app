@@ -6,7 +6,6 @@ import {
   LogOut,
   Settings,
   SmileIcon,
-  SunIcon,
   UserCircle2,
 } from "lucide-react";
 import Link from "next/link";
@@ -17,6 +16,7 @@ import { signIn, signOut } from "next-auth/react";
 import { Button } from "@/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 const NavBar = ({ session }: { session: Session | null }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -72,11 +72,11 @@ const NavBar = ({ session }: { session: Session | null }) => {
           >
             {/* Profile avatar */}
             <div className="max-w-max rounded-full overflow-hidden">
-              {session != null ? (
-                <img
+              {session != null && user && user.image ? (
+                <Image
                   width={48}
                   height={48}
-                  src={user?.image!}
+                  src={user.image}
                   alt="User Avatar"
                 />
               ) : (
