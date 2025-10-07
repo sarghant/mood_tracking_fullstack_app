@@ -4,7 +4,6 @@ import {
   ChevronDown,
   LogIn,
   LogOut,
-  Settings,
   SmileIcon,
   UserCircle2,
 } from "lucide-react";
