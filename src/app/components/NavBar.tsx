@@ -100,7 +100,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
             {session != null ? (
               <>
                 <ThemeSwitcher />
-                <Button asChild>
+                {/* <Button asChild>
                   <Link href="/settings">
                     <Settings
                       size={28}
@@ -108,7 +108,7 @@ const NavBar = ({ session }: { session: Session | null }) => {
                     />
                     <span className="font-medium">Account Settings</span>
                   </Link>
-                </Button>
+                </Button> */}
                 <Button type="button" onClick={() => signOut()}>
                   <LogOut
                     size={28}
