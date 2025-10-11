@@ -162,21 +162,20 @@ Each mood includes:
 
 ## 🎨 Mood Types
 
-| Mood           | Emoji | Description                  | Message                                               |
-| -------------- | ----- | ---------------------------- | ----------------------------------------------------- |
-| **Angry**      | 😠    | Feeling frustrated or upset  | "Take a Pause - Breathe deeply. You can handle this." |
-| **Sad**        | 😢    | Feeling down or melancholy   | "This Too Shall Pass - Tomorrow brings new hope."     |
-| **Neutral**    | 😐    | Balanced emotional state     | "Steady as You Go - Balance is your strength."        |
-| **Optimistic** | 😊    | Feeling hopeful and positive | "Keep Shining - Your positivity is contagious!"       |
-| **Ecstatic**   | 🤩    | Extremely happy and excited  | "You're Amazing - Celebrate this beautiful moment!"   |
+| Mood           | Emoji | Description                  | Message                                                              |
+| -------------- | ----- | ---------------------------- | -------------------------------------------------------------------- |
+| **Angry**      | 😠    | Feeling frustrated or upset  | "Take a Pause - Breathe deeply. You can handle this."                |
+| **Sad**        | ☹️    | Feeling down or melancholy   | "It's Okay to Feel Down - You're not alone. Things will get better." |
+| **Neutral**    | 😐    | Balanced emotional state     | "Stay Balanced - Stay present. You're doing fine."                   |
+| **Optimistic** | �     | Feeling hopeful and positive | "Look Forward! - Keep going. Good things are ahead."                 |
+| **Ecstatic**   | 😄    | Extremely happy and excited  | "Celebrate Joy!! - Enjoy this moment. You deserve it!"               |
 
 ## 🧪 Testing
 
-The application includes comprehensive tests for:
+The application currently includes tests for:
 
-- React components (Theme switcher, Daily log, etc.)
+- React components (Theme switcher, Daily log)
 - Utility functions (Date utilities, mood calculations)
-- API endpoints and data operations
 
 Run tests with:
 
