@@ -5,7 +5,13 @@ import { redirect } from "next/navigation";
 import AnimatedHeadingEmoji from "./components/AnimatedHeadingEmoji";
 
 export default async function Home() {
-  const session = await auth();
+  let session;
+  try {
+    session = await auth();
+  } catch (error) {
+    console.error("Auth error:", error);
+    session = null;
+  }
   if (session) redirect("/moods");
   return (
     <main className="container w-full p-8 mt-20 mx-auto">
