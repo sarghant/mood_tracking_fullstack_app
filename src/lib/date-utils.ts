@@ -18,7 +18,14 @@ export const forceMidnight = (timezone: string) => {
 
 export const checkTodaysMoodLog = (latestMoodDate: string | undefined) => {
   if (!latestMoodDate) return false;
+  // const today = new Date();
+  // today.setHours(0, 0, 0, 0);
+  // return today.toISOString() === latestMoodDate;
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return today.toISOString() === latestMoodDate;
+  const latestDate = new Date(latestMoodDate);
+  return (
+    today.getFullYear() === latestDate.getFullYear() &&
+    today.getMonth() === latestDate.getMonth() &&
+    today.getDate() === latestDate.getDate()
+  );
 };
