@@ -3,13 +3,14 @@ import { Button } from "@/ui/button";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import AnimatedHeadingEmoji from "./components/AnimatedHeadingEmoji";
+import { isDev } from "@/lib/utils";
 
 export default async function Home() {
   let session;
   try {
     session = await auth();
   } catch (error) {
-    console.error("Auth error:", error);
+    if (isDev) console.error("Auth error:", error);
     session = null;
   }
   if (session) redirect("/moods");

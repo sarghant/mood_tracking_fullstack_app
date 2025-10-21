@@ -1,8 +1,7 @@
 import prisma from "@/db/prisma";
 import { auth } from "../../auth";
 import { User } from "@prisma/client";
-
-const isDev = process.env.NODE_ENV === "development";
+import { logError } from "./utils";
 
 export async function getCurrentUser(): Promise<Partial<User> | null> {
   try {
@@ -28,14 +27,9 @@ export async function getCurrentUser(): Promise<Partial<User> | null> {
     }
     return userData;
   } catch (error) {
-    if (isDev)
-      logError("User data error: ", {
-        error: error instanceof Error ? error.message : error,
-      });
+    logError("User data error: ", {
+      error: error instanceof Error ? error.message : error,
+    });
     return null;
   }
-}
-
-function logError(message: string, context?: unknown) {
-  if (isDev) console.error(message, context);
 }

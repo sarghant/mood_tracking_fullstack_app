@@ -4,13 +4,14 @@ import { FaGithub } from "react-icons/fa";
 import { redirect } from "next/navigation";
 import { GoogleIcon } from "../components/custom-icons";
 import Link from "next/link";
+import { isDev } from "@/lib/utils";
 
 const SignInPage = async () => {
   let session;
   try {
     session = await auth();
   } catch (error) {
-    console.error("Auth error:", error);
+    if (isDev) console.error("Auth error:", error);
     session = null;
   }
   if (session) {
@@ -27,7 +28,7 @@ const SignInPage = async () => {
             key={provider.id}
             action={async () => {
               "use server";
-              await signIn(provider.id, { redirectTo: "/" });
+              await signIn(provider.id, { redirectTo: "/moods" });
             }}
             className="py-2.5 px-4"
           >

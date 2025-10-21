@@ -47,7 +47,6 @@ const DailyLog = ({
       router.refresh();
     } else toast.error(state.message);
   }, [state]);
-  console.log(hasLoggedMoodToday);
   return (
     <>
       <ToastContainer position="bottom-center" hideProgressBar={true} />
