@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { getAverageMood } from "@/lib/getAverageMood";
 import { useState } from "react";
 import Image from "next/image";
-import { Switch } from "@headlessui/react"; // If you use headlessui, otherwise use a simple checkbox
+import { Switch } from "@headlessui/react";
 
 enum DurationValue {
   SEVEN_DAYS = "7",

@@ -19,6 +19,7 @@ export async function getCurrentUser(): Promise<Partial<User> | null> {
       select: {
         id: true,
         email: true,
+        name: true,
       },
     });
     if (!userData) {
