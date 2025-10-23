@@ -10,7 +10,6 @@ import { useActionState, useEffect, useState } from "react";
 import { logMood } from "@/actions/moods.actions";
 import { XIcon } from "lucide-react";
 import type { Mood } from "@prisma/client";
-import { useRouter } from "next/navigation";
 
 const DailyLog = ({
   allMoods,
@@ -21,7 +20,6 @@ const DailyLog = ({
   currentMoodAccent: MoodDisplayData["colors"] | undefined;
   hasLoggedMoodToday: boolean;
 }) => {
-  const router = useRouter();
   // Form states
   const [state, formAction] = useActionState(logMood, {
     success: false,
@@ -44,7 +42,6 @@ const DailyLog = ({
     if (state.success) {
       toast.success(state.message);
       setShowForm(false);
-      router.refresh();
     } else toast.error(state.message);
   }, [state]);
   return (
