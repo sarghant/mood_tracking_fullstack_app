@@ -11,6 +11,7 @@ import { logMood } from "@/actions/moods.actions";
 import { toast, ToastContainer } from "react-toastify";
 import { Mood, MoodType } from "@prisma/client";
 import { MoodDisplayData } from "@/app/moods/constants/moods";
+import { mockAllMoods, mockCurrentMoodAccent } from "../../../fixtures/moods";
 
 jest.mock("@/actions/moods.actions", () => ({
   logMood: jest.fn(),
@@ -28,60 +29,8 @@ const mockToast = toast as jest.MockedFunction<typeof toast>;
 
 type MockPropsType = {
   allMoods: Mood[];
-  currentMoodAccent: MoodDisplayData["colors"];
+  currentMoodAccent: MoodDisplayData["colors"] | undefined;
   hasLoggedMoodToday: boolean;
-};
-
-const mockAllMoods: Mood[] = [
-  {
-    id: "mood-1",
-    userId: "user-1",
-    moodType: "ECSTATIC",
-    moodQuote: "Feeling amazing today!",
-    createdAt: new Date("2025-09-20T10:00:00Z"),
-    date: new Date("2025-09-20T00:00:00Z"),
-  },
-  {
-    id: "mood-2",
-    userId: "user-1",
-    moodType: "OPTIMISTIC",
-    moodQuote: "Things are looking up!",
-    createdAt: new Date("2025-09-19T14:30:00Z"),
-    date: new Date("2025-09-19T00:00:00Z"),
-  },
-  {
-    id: "mood-3",
-    userId: "user-1",
-    moodType: "NEUTRAL",
-    moodQuote: null, // Optional field
-    createdAt: new Date("2025-09-18T09:15:00Z"),
-    date: new Date("2025-09-18T00:00:00Z"),
-  },
-  {
-    id: "mood-4",
-    userId: "user-1",
-    moodType: "SAD",
-    moodQuote: "Not my best day.",
-    createdAt: new Date("2025-09-17T16:45:00Z"),
-    date: new Date("2025-09-17T00:00:00Z"),
-  },
-  {
-    id: "mood-5",
-    userId: "user-1",
-    moodType: "ANGRY",
-    moodQuote: "Really frustrated today!",
-    createdAt: new Date("2025-09-16T11:20:00Z"),
-    date: new Date("2025-09-16T00:00:00Z"),
-  },
-];
-
-const mockCurrentMoodAccent = {
-  foreground: "text-teal-500",
-  chart: "#24b896",
-  background: "bg-teal-500",
-  hoverBackground:
-    "hover:bg-teal-600 focus:bg-teal-600 disabled:hover:bg-teal-500 disabled:focus:bg-teal-500",
-  activeOutlineColor: "outline-teal-400",
 };
 
 const defaultProps: MockPropsType = {
@@ -196,8 +145,8 @@ describe("DailyLog", () => {
       });
 
       expect(showFormButton).toHaveClass(
-        mockCurrentMoodAccent.background,
-        mockCurrentMoodAccent.hoverBackground
+        mockCurrentMoodAccent!.background,
+        mockCurrentMoodAccent!.hoverBackground
       );
     });
     //

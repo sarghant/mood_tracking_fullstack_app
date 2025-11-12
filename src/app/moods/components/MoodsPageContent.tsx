@@ -11,8 +11,8 @@ const MoodsPageContent = ({
   latestMood,
 }: {
   user: Partial<User>;
-  allMoods: Mood[] | null | undefined;
-  latestMood: Mood | null | undefined;
+  allMoods: Mood[] | null;
+  latestMood: Mood | null;
 }) => {
   const currentMood = moods.find((mood) => {
     if (latestMood) return latestMood.moodType === mood.moodType;

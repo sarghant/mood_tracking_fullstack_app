@@ -36,14 +36,14 @@ describe("getAverageMood", () => {
       const data = [
         chartDataMock(1, 2, "SAD"),
         chartDataMock(3, 4, "OPTIMISTIC"),
-        chartDataMock(5, 5, "ECSTATIC"),
-        chartDataMock(4, 8, "OPTIMISTIC"),
+        chartDataMock(4, 5, "ECSTATIC"),
+        chartDataMock(3, 8, "OPTIMISTIC"),
       ];
       const result = getAverageMood(data, 7);
 
       expect(result).not.toBe(null);
-      expect(result?.moodValue).toBe(3);
-      expect(result?.moodType).toBe("OPTIMISTIC");
+      expect(result?.moodValue).toBe(1);
+      expect(result?.moodType).toBe("SAD");
     });
     it("should handle all data when duration is 0", () => {
       const data = [chartDataMock(3, 3, "OPTIMISTIC"), chartDataMock(2, 60)];

@@ -45,17 +45,20 @@ describe("date-utils", () => {
     });
   });
   describe("checkTodaysMoodLog", () => {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     it("should return false when mood date is undefined", () => {
-      expect(checkTodaysMoodLog(undefined)).toBe(false);
+      expect(checkTodaysMoodLog(undefined, timezone)).toBe(false);
     });
     it("should return false when mood date doesn't match current date", () => {
-      expect(checkTodaysMoodLog("2025-08-05T00:00:00.000Z")).toBe(false);
+      expect(checkTodaysMoodLog("2025-08-05T00:00:00.000Z", timezone)).toBe(
+        false
+      );
     });
     it("should return true when mood date matches today", () => {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      expect(checkTodaysMoodLog(today.toISOString())).toBe(true);
+      expect(checkTodaysMoodLog(today.toISOString(), timezone)).toBe(true);
     });
   });
 });
