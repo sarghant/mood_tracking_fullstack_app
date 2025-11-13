@@ -3,8 +3,8 @@ import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="fixed bottom-0 inset-x-0">
-      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-4 py-6 text-sm text-gray-600 dark:text-gray-400">
+    <footer className="sticky top-[100vh] inset-x-0">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-2 sm:gap-4 px-4 py-6 text-sm text-gray-600 dark:text-gray-400">
         {/* Branding / Copyright */}
         <p>
           © {new Date().getFullYear()} Moodies ·{" "}

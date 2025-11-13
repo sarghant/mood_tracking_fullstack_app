@@ -52,7 +52,7 @@ const BackgroundEffects = () => {
   useFloatingEmojis(containerRef);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 pointer-events-none z-0">
+    <div ref={containerRef} className="fixed inset-0 pointer-events-none -z-20">
       {emojiConfigs.map((config) => (
         <Image
           key={config.id}

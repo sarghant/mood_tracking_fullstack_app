@@ -10,7 +10,7 @@ const MoodsPage = async () => {
   const latestMood = await getLatestMood();
 
   return (
-    <div className="container relative w-md sm:w-auto px-2 mt-8 md:mt-12 mx-auto">
+    <div className="container relative w-md sm:w-auto px-2 pb-32 sm:pb-4 mt-8 md:mt-12 mx-auto">
       <MoodsPageContent
         user={user}
         allMoods={allMoods}

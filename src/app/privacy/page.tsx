@@ -1,6 +1,6 @@
 const PrivacyPolicyPage = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 pb-24 space-y-6">
+    <div className="max-w-3xl mx-auto p-6 pb-32 space-y-6">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
         <p className="text-gray-600 dark:text-gray-400">
