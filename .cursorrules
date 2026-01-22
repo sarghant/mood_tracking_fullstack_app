@@ -1,0 +1,18 @@
+# Code Quality Rules
+
+This project follows comprehensive coding standards and patterns documented in `.cursor/code-quality-rules.md`.
+
+For detailed rules and patterns, see: `.cursor/code-quality-rules.md`
+
+## Quick Reference
+
+- **Project Structure**: Next.js App Router with organized directories (`src/app/`, `src/lib/`, `src/ui/`, etc.)
+- **TypeScript**: Strict mode, explicit return types, use `@/*` path aliases
+- **Components**: Default to Server Components, use `"use client"` only when needed
+- **Error Handling**: Use `logError` utility, return `null` on errors, handle gracefully
+- **Database**: Prisma singleton pattern with Accelerate extension
+- **Server Actions**: Use `"use server"`, return `{ success: boolean; message: string }`
+- **Styling**: Tailwind CSS with `cn()` utility, support dark mode
+- **File Naming**: kebab-case for actions/utils, PascalCase for components, camelCase for hooks
+
+See `.cursor/code-quality-rules.md` for complete documentation.
