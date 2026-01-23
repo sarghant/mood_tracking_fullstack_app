@@ -1,6 +1,6 @@
 import prisma from "@/db/prisma";
 import { getCurrentUser } from "./getCurrentUser";
-import { Mood } from "@prisma/client";
+import { Mood } from "@prisma/generated";
 import { logError } from "./utils";
 
 export async function getAllMoods(): Promise<Mood[] | null> {

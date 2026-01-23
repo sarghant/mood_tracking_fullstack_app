@@ -1,4 +1,14 @@
-import { MoodType } from "@prisma/client";
+// Define MoodType locally to avoid importing Prisma in client components
+// This must match the enum in prisma/schema.prisma
+export const MoodType = {
+  ANGRY: "ANGRY",
+  SAD: "SAD",
+  NEUTRAL: "NEUTRAL",
+  OPTIMISTIC: "OPTIMISTIC",
+  ECSTATIC: "ECSTATIC",
+} as const;
+
+export type MoodType = (typeof MoodType)[keyof typeof MoodType];
 
 export type MoodDisplayData = {
   moodType: MoodType;

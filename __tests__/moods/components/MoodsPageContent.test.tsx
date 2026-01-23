@@ -4,7 +4,7 @@ import MoodsPageContent from "@/app/moods/components/MoodsPageContent";
 import { latestMood, mockAllMoods } from "../../../fixtures/moods";
 import { logMood } from "@/actions/moods.actions";
 import { moods } from "@/app/moods/constants/moods";
-import { Mood, User } from "@prisma/client";
+import { Mood, User } from "@prisma/generated";
 
 const mockUser = {
   id: "user-1",

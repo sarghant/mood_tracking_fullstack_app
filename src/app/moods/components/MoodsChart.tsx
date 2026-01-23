@@ -1,5 +1,4 @@
-import type { MoodType } from "@prisma/client";
-import type { MoodDisplayData } from "../constants/moods";
+import type { MoodType, MoodDisplayData } from "../constants/moods";
 import { moodChartData } from "../constants/moods";
 import Image from "next/image";
 import {

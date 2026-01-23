@@ -2,7 +2,7 @@
 
 import { checkTodaysMoodLog, dateFormatter } from "@/lib/date-utils";
 import DailyLog from "./DailyLog";
-import type { Mood, User } from "@prisma/client";
+import type { Mood, User } from "@prisma/generated";
 import { MoodDisplayData, moods } from "../constants/moods";
 
 const MoodsPageContent = ({

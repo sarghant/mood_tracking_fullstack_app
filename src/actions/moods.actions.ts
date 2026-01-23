@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/db/prisma";
-import { MoodType } from "@prisma/client";
+import { MoodType } from "@prisma/generated";
 import { forceMidnight } from "@/lib/date-utils";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { revalidatePath } from "next/cache";

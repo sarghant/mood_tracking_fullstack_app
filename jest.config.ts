@@ -16,6 +16,7 @@ const config: Config = {
 
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
+    "^@prisma/generated$": "<rootDir>/prisma/generated/prisma/client",
   },
 
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],

@@ -1,6 +1,6 @@
 import prisma from "@/db/prisma";
 import { auth } from "../../auth";
-import { User } from "@prisma/client";
+import { User } from "@prisma/generated";
 import { logError } from "./utils";
 
 export async function getCurrentUser(): Promise<Partial<User> | null> {

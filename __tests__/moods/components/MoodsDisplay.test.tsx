@@ -1,7 +1,7 @@
 import { screen, render, fireEvent, within } from "@testing-library/react";
 import MoodsDisplay from "@/app/moods/components/MoodsDisplay";
 import { mockAllMoods, mockCurrentMoodAccent } from "../../../fixtures/moods";
-import { Mood } from "@prisma/client";
+import { Mood } from "@prisma/generated";
 import { MoodDisplayData } from "@/app/moods/constants/moods";
 
 type MockPropsType = {

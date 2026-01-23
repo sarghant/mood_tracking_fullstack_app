@@ -1,5 +1,5 @@
 import { ChartDataType } from "@/app/moods/components/MoodsChart";
-import { MoodType } from "@prisma/client";
+import { MoodType } from "@/app/moods/constants/moods";
 import { getAverageMood } from "@/lib/getAverageMood";
 import { format } from "date-fns";
 

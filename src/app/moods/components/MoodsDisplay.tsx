@@ -1,7 +1,7 @@
 "use client";
 
 import { moodChartData, type MoodDisplayData } from "../constants/moods";
-import type { Mood } from "@prisma/client";
+import type { Mood } from "@prisma/generated";
 import MoodsChart from "./MoodsChart";
 import { format } from "date-fns";
 import { getAverageMood } from "@/lib/getAverageMood";

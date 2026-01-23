@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useActionState, useEffect, useState } from "react";
 import { logMood } from "@/actions/moods.actions";
 import { XIcon } from "lucide-react";
-import type { Mood } from "@prisma/client";
+import type { Mood } from "@prisma/generated";
 
 const DailyLog = ({
   allMoods,

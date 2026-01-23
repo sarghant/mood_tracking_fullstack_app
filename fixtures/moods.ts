@@ -1,5 +1,5 @@
 import { moodChartData, moods } from "@/app/moods/constants/moods";
-import { Mood } from "@prisma/client";
+import { Mood } from "@prisma/generated";
 import { format } from "date-fns";
 
 export const mockAllMoods: Mood[] = [
