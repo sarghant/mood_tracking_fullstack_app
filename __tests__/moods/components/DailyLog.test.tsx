@@ -10,7 +10,7 @@ import DailyLog from "@/app/moods/components/DailyLog";
 import { logMood } from "@/actions/moods.actions";
 import { toast, ToastContainer } from "react-toastify";
 import { MoodDisplayData, MoodType } from "@/app/moods/constants/moods";
-import type { Mood } from "@prisma/generated";
+import type { MoodWithDailyLog } from "@/lib/getMood";
 import { mockAllMoods, mockCurrentMoodAccent } from "../../../fixtures/moods";
 
 jest.mock("@/actions/moods.actions", () => ({
@@ -28,7 +28,7 @@ const mockLogMood = logMood as jest.MockedFunction<typeof logMood>;
 const mockToast = toast as jest.MockedFunction<typeof toast>;
 
 type MockPropsType = {
-  allMoods: Mood[];
+  allMoods: MoodWithDailyLog[];
   currentMoodAccent: MoodDisplayData["colors"] | undefined;
   hasLoggedMoodToday: boolean;
 };

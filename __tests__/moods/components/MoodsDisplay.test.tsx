@@ -1,13 +1,13 @@
 import { screen, render, fireEvent, within } from "@testing-library/react";
 import MoodsDisplay from "@/app/moods/components/MoodsDisplay";
 import { mockAllMoods, mockCurrentMoodAccent } from "../../../fixtures/moods";
-import { Mood } from "@prisma/generated";
+import type { MoodWithDailyLog } from "@/lib/getMood";
 import { MoodDisplayData } from "@/app/moods/constants/moods";
 
 type MockPropsType = {
   showForm: boolean;
   hasLoggedMoodToday: boolean;
-  allMoods: Mood[];
+  allMoods: MoodWithDailyLog[];
   currentMoodAccent: MoodDisplayData["colors"] | undefined;
 };
 const defaultProps: MockPropsType = {
@@ -16,38 +16,62 @@ const defaultProps: MockPropsType = {
   allMoods: mockAllMoods,
   currentMoodAccent: mockCurrentMoodAccent,
 };
-const additionalMoods: Mood[] = [
+const additionalMoods: MoodWithDailyLog[] = [
   {
     id: "mood-6",
-    userId: "user-1",
+    dailyLogId: "daily-log-6",
     moodType: "NEUTRAL",
     moodQuote: "Feeling fine...",
     createdAt: new Date("2025-09-15T12:20:00Z"),
-    date: new Date("2025-09-15T00:00:00Z"),
+    dailyLog: {
+      id: "daily-log-6",
+      userId: "user-1",
+      date: new Date("2025-09-15T00:00:00Z"),
+      createdAt: new Date("2025-09-15T12:20:00Z"),
+      updatedAt: new Date("2025-09-15T12:20:00Z"),
+    },
   },
   {
     id: "mood-7",
-    userId: "user-1",
+    dailyLogId: "daily-log-7",
     moodType: "OPTIMISTIC",
     moodQuote: null,
     createdAt: new Date("2025-09-14T20:20:00Z"),
-    date: new Date("2025-09-14T00:00:00Z"),
+    dailyLog: {
+      id: "daily-log-7",
+      userId: "user-1",
+      date: new Date("2025-09-14T00:00:00Z"),
+      createdAt: new Date("2025-09-14T20:20:00Z"),
+      updatedAt: new Date("2025-09-14T20:20:00Z"),
+    },
   },
   {
     id: "mood-8",
-    userId: "user-1",
+    dailyLogId: "daily-log-8",
     moodType: "SAD",
     moodQuote: "Pretty down today.",
     createdAt: new Date("2025-09-11T12:00:00Z"),
-    date: new Date("2025-09-11T00:00:00Z"),
+    dailyLog: {
+      id: "daily-log-8",
+      userId: "user-1",
+      date: new Date("2025-09-11T00:00:00Z"),
+      createdAt: new Date("2025-09-11T12:00:00Z"),
+      updatedAt: new Date("2025-09-11T12:00:00Z"),
+    },
   },
   {
     id: "mood-9",
-    userId: "user-1",
+    dailyLogId: "daily-log-9",
     moodType: "SAD",
     moodQuote: "Not too good...",
     createdAt: new Date("2025-09-08T08:30:00Z"),
-    date: new Date("2025-09-08T00:00:00Z"),
+    dailyLog: {
+      id: "daily-log-9",
+      userId: "user-1",
+      date: new Date("2025-09-08T00:00:00Z"),
+      createdAt: new Date("2025-09-08T08:30:00Z"),
+      updatedAt: new Date("2025-09-08T08:30:00Z"),
+    },
   },
 ];
 const renderMoodsDisplay = (overrides: Partial<MockPropsType> = {}) => {

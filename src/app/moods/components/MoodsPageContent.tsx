@@ -2,7 +2,8 @@
 
 import { checkTodaysMoodLog, dateFormatter } from "@/lib/date-utils";
 import DailyLog from "./DailyLog";
-import type { Mood, User } from "@prisma/generated";
+import type { User } from "@prisma/generated";
+import type { MoodWithDailyLog } from "@/lib/getMood";
 import { MoodDisplayData, moods } from "../constants/moods";
 
 const MoodsPageContent = ({
@@ -11,8 +12,8 @@ const MoodsPageContent = ({
   latestMood,
 }: {
   user: Partial<User>;
-  allMoods: Mood[] | null;
-  latestMood: Mood | null;
+  allMoods: MoodWithDailyLog[] | null;
+  latestMood: MoodWithDailyLog | null;
 }) => {
   const currentMood = moods.find((mood) => {
     if (latestMood) return latestMood.moodType === mood.moodType;
@@ -21,7 +22,7 @@ const MoodsPageContent = ({
   const { heading, upliftingMessage, colors } = currentMood as MoodDisplayData;
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const hasLoggedMoodToday = checkTodaysMoodLog(
-    latestMood?.date?.toISOString(),
+    latestMood?.dailyLog?.date?.toISOString(),
     timezone
   );
   return (

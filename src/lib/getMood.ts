@@ -1,9 +1,14 @@
 import prisma from "@/db/prisma";
 import { getCurrentUser } from "./getCurrentUser";
-import { Mood } from "@prisma/generated";
+import { Mood, DailyLog } from "@prisma/generated";
 import { logError } from "./utils";
 
-export async function getAllMoods(): Promise<Mood[] | null> {
+// Type for Mood with its parent DailyLog relation (includes date)
+export type MoodWithDailyLog = Mood & {
+  dailyLog: DailyLog;
+};
+
+export async function getAllMoods(): Promise<MoodWithDailyLog[] | null> {
   try {
     const user = await getCurrentUser();
     if (!user) {
@@ -12,10 +17,17 @@ export async function getAllMoods(): Promise<Mood[] | null> {
     }
     const moods = await prisma.mood.findMany({
       where: {
-        userId: user.id,
+        dailyLog: {
+          userId: user.id,
+        },
+      },
+      include: {
+        dailyLog: true,
       },
       orderBy: {
-        date: "desc",
+        dailyLog: {
+          date: "desc",
+        },
       },
     });
     return moods;
@@ -27,7 +39,7 @@ export async function getAllMoods(): Promise<Mood[] | null> {
   }
 }
 
-export async function getLatestMood(): Promise<Mood | null> {
+export async function getLatestMood(): Promise<MoodWithDailyLog | null> {
   try {
     const user = await getCurrentUser();
     if (!user) {
@@ -35,8 +47,19 @@ export async function getLatestMood(): Promise<Mood | null> {
       return null;
     }
     const latestMood = await prisma.mood.findFirst({
-      where: { userId: user.id },
-      orderBy: { date: "desc" },
+      where: {
+        dailyLog: {
+          userId: user.id,
+        },
+      },
+      include: {
+        dailyLog: true,
+      },
+      orderBy: {
+        dailyLog: {
+          date: "desc",
+        },
+      },
     });
     return latestMood;
   } catch (error) {

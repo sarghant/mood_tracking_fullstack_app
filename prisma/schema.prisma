@@ -22,7 +22,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  moods Mood[]
+  dailyLogs DailyLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -67,16 +67,39 @@ enum MoodType {
   ECSTATIC
 }
 
-model Mood {
-  id     String @id @default(cuid())
-  user   User   @relation(fields: [userId], references: [id])
+model DailyLog {
+  id     String   @id @default(cuid())
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
+  date   DateTime @db.Date
+
+  mood  Mood?
+  sleep Sleep?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])
+}
+
+model Mood {
+  id         String   @id @default(cuid())
+  dailyLog   DailyLog @relation(fields: [dailyLogId], references: [id], onDelete: Cascade)
+  dailyLogId String   @unique
 
   moodType  MoodType
   moodQuote String?
 
   createdAt DateTime @default(now())
-  date      DateTime
+}
 
-  @@unique([userId, date])
+model Sleep {
+  id         String   @id @default(cuid())
+  dailyLog   DailyLog @relation(fields: [dailyLogId], references: [id], onDelete: Cascade)
+  dailyLogId String   @unique
+
+  hours   Float
+  quality Int?
+
+  createdAt DateTime @default(now())
 }

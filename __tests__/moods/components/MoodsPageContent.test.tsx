@@ -4,7 +4,8 @@ import MoodsPageContent from "@/app/moods/components/MoodsPageContent";
 import { latestMood, mockAllMoods } from "../../../fixtures/moods";
 import { logMood } from "@/actions/moods.actions";
 import { moods } from "@/app/moods/constants/moods";
-import { Mood, User } from "@prisma/generated";
+import type { User } from "@prisma/generated";
+import type { MoodWithDailyLog } from "@/lib/getMood";
 
 const mockUser = {
   id: "user-1",
@@ -18,8 +19,8 @@ jest.mock("@/actions/moods.actions", () => ({
 
 type MockPropsType = {
   user: Partial<User>;
-  allMoods: Mood[] | null;
-  latestMood: Mood | null;
+  allMoods: MoodWithDailyLog[] | null;
+  latestMood: MoodWithDailyLog | null;
 };
 const defaultProps: MockPropsType = {
   user: mockUser,

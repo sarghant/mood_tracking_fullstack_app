@@ -29,13 +29,32 @@ export async function logMood(
     const timezone = formData.get("timezone") as string;
     if (!timezone) throw Error("");
     const moodDate = forceMidnight(timezone);
-    // Create mood
-    await prisma.mood.create({
-      data: {
+
+    // Find or create DailyLog for this date, then create the mood
+    await prisma.dailyLog.upsert({
+      where: {
+        userId_date: {
+          userId: user.id!,
+          date: moodDate,
+        },
+      },
+      create: {
         userId: user.id!,
-        moodType,
-        moodQuote,
         date: moodDate,
+        mood: {
+          create: {
+            moodType,
+            moodQuote,
+          },
+        },
+      },
+      update: {
+        mood: {
+          create: {
+            moodType,
+            moodQuote,
+          },
+        },
       },
     });
     revalidatePath("/moods");

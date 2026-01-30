@@ -1,7 +1,7 @@
 "use client";
 
 import { moodChartData, type MoodDisplayData } from "../constants/moods";
-import type { Mood } from "@prisma/generated";
+import type { MoodWithDailyLog } from "@/lib/getMood";
 import MoodsChart from "./MoodsChart";
 import { format } from "date-fns";
 import { getAverageMood } from "@/lib/getAverageMood";
@@ -25,7 +25,7 @@ const MoodsDisplay = ({
 }: {
   showForm: boolean;
   hasLoggedMoodToday: boolean;
-  allMoods: Mood[];
+  allMoods: MoodWithDailyLog[];
   currentMoodAccent: MoodDisplayData["colors"] | undefined;
 }) => {
   const [durationValue, setDurationValue] = useState<DurationValue>(
@@ -37,14 +37,15 @@ const MoodsDisplay = ({
   const chartData = allMoods
     .slice(0)
     .sort(
-      (a: Mood, b: Mood) =>
-        new Date(a.date).getTime() - new Date(b.date).getTime()
+      (a: MoodWithDailyLog, b: MoodWithDailyLog) =>
+        new Date(a.dailyLog.date).getTime() -
+        new Date(b.dailyLog.date).getTime()
     )
     .map((mood) => {
       return {
         moodValue: moodChartData[mood.moodType].value,
-        date: mood.createdAt,
-        formattedDate: format(new Date(mood.createdAt), "MMM d"),
+        date: mood.dailyLog.date,
+        formattedDate: format(new Date(mood.dailyLog.date), "MMM d"),
         moodType: mood.moodType,
         emoji: moodChartData[mood.moodType].emoji,
         color: moodChartData[mood.moodType].color,
