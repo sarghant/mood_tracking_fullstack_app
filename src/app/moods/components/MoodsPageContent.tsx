@@ -22,7 +22,7 @@ const MoodsPageContent = ({
   const { heading, upliftingMessage, colors } = currentMood as MoodDisplayData;
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const hasLoggedMoodToday = checkTodaysMoodLog(
-    latestMood?.dailyLog?.date?.toISOString(),
+    latestMood?.dailyLog?.date,
     timezone
   );
   return (

@@ -1,3 +1,4 @@
+import { TZDate } from "@date-fns/tz";
 import {
   dateFormatter,
   forceMidnight,
@@ -29,19 +30,27 @@ describe("date-utils", () => {
   });
   describe("forceMidnight", () => {
     it("should return a date at midnight", () => {
-      const result = forceMidnight("America/New_York");
+      const timezone = "America/New_York";
+      const result = forceMidnight(timezone);
+      const tzNow = new TZDate(new Date(), timezone);
+      const tzResult = new TZDate(result, timezone);
 
-      expect(result.getHours()).toBe(0);
-      expect(result.getMinutes()).toBe(0);
-      expect(result.getSeconds()).toBe(0);
-      expect(result.getMilliseconds()).toBe(0);
+      expect(result.getUTCHours()).toBe(0);
+      expect(result.getUTCMinutes()).toBe(0);
+      expect(result.getUTCSeconds()).toBe(0);
+      expect(result.getUTCMilliseconds()).toBe(0);
+
+      // Ensure stored date maps to the user's calendar date
+      expect(tzResult.getFullYear()).toBe(tzNow.getFullYear());
+      expect(tzResult.getMonth()).toBe(tzNow.getMonth());
+      expect(tzResult.getDate()).toBe(tzNow.getDate());
     });
     it("should work with different timezones", () => {
       const utcResult = forceMidnight("UTC");
       const tokyoResult = forceMidnight("Asia/Tokyo");
 
-      expect(utcResult.getHours()).toBe(0);
-      expect(tokyoResult.getHours()).toBe(0);
+      expect(utcResult.getUTCHours()).toBe(0);
+      expect(tokyoResult.getUTCHours()).toBe(0);
     });
   });
   describe("checkTodaysMoodLog", () => {
@@ -49,16 +58,36 @@ describe("date-utils", () => {
     it("should return false when mood date is undefined", () => {
       expect(checkTodaysMoodLog(undefined, timezone)).toBe(false);
     });
-    it("should return false when mood date doesn't match current date", () => {
+    it("should return false when mood date doesn't match current date (Date object)", () => {
+      // Simulate a @db.Date field returned by Prisma (midnight UTC for a past date)
+      const pastDate = new Date("2025-08-05T00:00:00.000Z");
+      expect(checkTodaysMoodLog(pastDate, timezone)).toBe(false);
+    });
+    it("should return false when mood date doesn't match current date (string)", () => {
+      // Simulate a serialized date from Server Component to Client Component
       expect(checkTodaysMoodLog("2025-08-05T00:00:00.000Z", timezone)).toBe(
         false
       );
     });
-    it("should return true when mood date matches today", () => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+    it("should return true when mood date matches today (Date object)", () => {
+      // Simulate a @db.Date field: create a Date at midnight UTC for today's calendar date
+      const now = new Date();
+      const todayMidnightUTC = new Date(
+        Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
+      );
 
-      expect(checkTodaysMoodLog(today.toISOString(), timezone)).toBe(true);
+      expect(checkTodaysMoodLog(todayMidnightUTC, timezone)).toBe(true);
+    });
+    it("should return true when mood date matches today (string)", () => {
+      // Simulate a serialized date: ISO string at midnight UTC for today
+      const now = new Date();
+      const todayMidnightUTC = new Date(
+        Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
+      );
+
+      expect(checkTodaysMoodLog(todayMidnightUTC.toISOString(), timezone)).toBe(
+        true
+      );
     });
   });
 });
