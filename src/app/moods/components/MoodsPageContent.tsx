@@ -4,16 +4,21 @@ import { checkTodaysMoodLog, dateFormatter } from "@/lib/date-utils";
 import DailyLog from "./DailyLog";
 import type { User } from "@prisma/generated";
 import type { MoodWithDailyLog } from "@/lib/getMood";
+import type { SleepWithDailyLog } from "@/lib/getSleep";
 import { MoodDisplayData, moods } from "../constants/moods";
 
 const MoodsPageContent = ({
   user,
   allMoods,
   latestMood,
+  allSleepLogs,
+  latestSleep,
 }: {
   user: Partial<User>;
   allMoods: MoodWithDailyLog[] | null;
   latestMood: MoodWithDailyLog | null;
+  allSleepLogs: SleepWithDailyLog[] | null;
+  latestSleep: SleepWithDailyLog | null;
 }) => {
   const currentMood = moods.find((mood) => {
     if (latestMood) return latestMood.moodType === mood.moodType;
@@ -62,6 +67,8 @@ const MoodsPageContent = ({
         allMoods={allMoods!}
         currentMoodAccent={colors}
         hasLoggedMoodToday={hasLoggedMoodToday}
+        allSleepLogs={allSleepLogs}
+        latestSleep={latestSleep}
       />
     </>
   );

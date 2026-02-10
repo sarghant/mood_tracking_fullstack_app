@@ -1,13 +1,19 @@
 import { redirect } from "next/navigation";
 import { getAllMoods, getLatestMood } from "@/lib/getMood";
+import { getAllSleepLogs, getLatestSleep } from "@/lib/getSleep";
 import MoodsPageContent from "./components/MoodsPageContent";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 
 const MoodsPage = async () => {
   const user = await getCurrentUser();
   if (!user) redirect("/");
-  const allMoods = await getAllMoods();
-  const latestMood = await getLatestMood();
+
+  const [allMoods, latestMood, allSleepLogs, latestSleep] = await Promise.all([
+    getAllMoods(),
+    getLatestMood(),
+    getAllSleepLogs(),
+    getLatestSleep(),
+  ]);
 
   return (
     <div className="container relative w-md sm:w-auto px-2 pb-32 sm:pb-4 mt-8 md:mt-12 mx-auto">
@@ -15,6 +21,8 @@ const MoodsPage = async () => {
         user={user}
         allMoods={allMoods}
         latestMood={latestMood}
+        allSleepLogs={allSleepLogs}
+        latestSleep={latestSleep}
       />
     </div>
   );

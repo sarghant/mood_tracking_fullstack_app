@@ -2,6 +2,7 @@
 
 import { moods } from "../constants/moods";
 import type { MoodDisplayData } from "../constants/moods";
+import { sleepQualityOptions } from "../constants/sleep";
 import MoodsDisplay from "./MoodsDisplay";
 import { toast, ToastContainer } from "react-toastify";
 import { Button } from "@/ui/button";
@@ -10,23 +11,20 @@ import { useActionState, useEffect, useState } from "react";
 import { logMood } from "@/actions/moods.actions";
 import { XIcon, MoonIcon } from "lucide-react";
 import type { MoodWithDailyLog } from "@/lib/getMood";
-
-const sleepQualityOptions = [
-  { label: "Rough", color: "text-slate-400 dark:text-slate-500", fill: "fill-slate-400 dark:fill-slate-500" },
-  { label: "Restless", color: "text-rose-300 dark:text-rose-400/70", fill: "fill-rose-300 dark:fill-rose-400/70" },
-  { label: "Okay", color: "text-amber-400 dark:text-amber-300", fill: "fill-amber-400 dark:fill-amber-300" },
-  { label: "Restful", color: "text-green-500 dark:text-green-400", fill: "fill-green-500 dark:fill-green-400" },
-  { label: "Refreshing", color: "text-sky-500 dark:text-sky-400", fill: "fill-sky-500 dark:fill-sky-400" },
-];
+import type { SleepWithDailyLog } from "@/lib/getSleep";
 
 const DailyLog = ({
   allMoods,
   currentMoodAccent,
   hasLoggedMoodToday,
+  allSleepLogs,
+  latestSleep,
 }: {
   allMoods: MoodWithDailyLog[];
   currentMoodAccent: MoodDisplayData["colors"] | undefined;
   hasLoggedMoodToday: boolean;
+  allSleepLogs: SleepWithDailyLog[] | null;
+  latestSleep: SleepWithDailyLog | null;
 }) => {
   // Form states
   const [state, formAction] = useActionState(logMood, {
@@ -295,6 +293,8 @@ const DailyLog = ({
         hasLoggedMoodToday={hasLoggedMoodToday}
         currentMoodAccent={currentMoodAccent}
         allMoods={allMoods}
+        allSleepLogs={allSleepLogs}
+        latestSleep={latestSleep}
       />
     </>
   );
